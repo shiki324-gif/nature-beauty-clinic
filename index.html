@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>〇〇美容皮膚科クリニック</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <span class="logo-main">〇〇 Beauty Clinic</span>
+        <span class="logo-sub">美容皮膚科</span>
+      </a>
+      <!-- ハンバーガーボタン（モバイル用） -->
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <ul class="nav-list">
+          <li><a href="#hero" class="nav-link">TOP</a></li>
+          <li><a href="#menu" class="nav-link">施術メニュー</a></li>
+          <li><a href="#access" class="nav-link">アクセス</a></li>
+          <li><a href="#" class="nav-link nav-cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== ヒーローバナー ===== -->
+  <section class="hero" id="hero">
+    <!-- 装飾用SVG -->
+    <div class="hero-decoration hero-decoration--left" aria-hidden="true">
+      <svg viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="30" cy="80" r="18" fill="#c9a87c" opacity="0.15"/>
+        <circle cx="80" cy="40" r="10" fill="#c9a87c" opacity="0.1"/>
+        <circle cx="60" cy="180" r="30" fill="#f5e6d3" opacity="0.4"/>
+        <circle cx="20" cy="260" r="12" fill="#c9a87c" opacity="0.12"/>
+        <ellipse cx="100" cy="380" rx="45" ry="70" fill="#f5e6d3" opacity="0.25" transform="rotate(-20 100 380)"/>
+        <circle cx="150" cy="300" r="8" fill="#c9a87c" opacity="0.1"/>
+        <circle cx="40" cy="440" r="22" fill="#f5e6d3" opacity="0.3"/>
+        <path d="M10 120 Q50 100 90 130 Q130 160 80 180 Q30 200 10 120Z" fill="#c9a87c" opacity="0.07"/>
+      </svg>
+    </div>
+    <div class="hero-decoration hero-decoration--right" aria-hidden="true">
+      <svg viewBox="0 0 200 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="170" cy="80" r="18" fill="#c9a87c" opacity="0.15"/>
+        <circle cx="120" cy="40" r="10" fill="#c9a87c" opacity="0.1"/>
+        <circle cx="140" cy="180" r="30" fill="#f5e6d3" opacity="0.4"/>
+        <circle cx="180" cy="260" r="12" fill="#c9a87c" opacity="0.12"/>
+        <ellipse cx="100" cy="380" rx="45" ry="70" fill="#f5e6d3" opacity="0.25" transform="rotate(20 100 380)"/>
+        <circle cx="50" cy="300" r="8" fill="#c9a87c" opacity="0.1"/>
+        <circle cx="160" cy="440" r="22" fill="#f5e6d3" opacity="0.3"/>
+        <path d="M190 120 Q150 100 110 130 Q70 160 120 180 Q170 200 190 120Z" fill="#c9a87c" opacity="0.07"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-sub fade-in">あなたの美しさと向き合う場所</p>
+      <h1 class="hero-title fade-in fade-in--delay1">あなたの美しさを、<br class="sp-only" />もっと自由に。</h1>
+      <p class="hero-desc fade-in fade-in--delay2">
+        一人ひとりの肌と丁寧に向き合い、<br />
+        自信を持てる素肌へ導きます。
+      </p>
+      <a href="#menu" class="btn btn--primary fade-in fade-in--delay3">施術メニューを見る</a>
+    </div>
+
+    <!-- スクロールインジケーター -->
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>SCROLL</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== コンセプト ===== -->
+  <section class="concept">
+    <div class="container">
+      <div class="concept-inner">
+        <div class="concept-text reveal">
+          <p class="section-label">CONCEPT</p>
+          <h2 class="section-title">美容医療で、<br />毎日がもっと輝く</h2>
+          <p class="section-desc">
+            当クリニックでは、患者様一人ひとりのお肌の状態やご要望をしっかりとお聞きした上で、最適な施術をご提案します。経験豊富な医師と専門スタッフが、安全で効果的な美容医療をご提供します。
+          </p>
+        </div>
+        <div class="concept-image reveal reveal--delay">
+          <div class="concept-image-inner">
+            <div class="concept-image-bg"></div>
+            <div class="concept-badge">
+              <span class="concept-badge-num">3,000<span class="concept-badge-plus">+</span></span>
+              <span class="concept-badge-text">施術実績</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 施術メニュー ===== -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">MENU</p>
+        <h2 class="section-title">施術メニュー</h2>
+        <p class="section-desc">お肌のお悩みに合わせた幅広い施術をご用意しています。</p>
+      </div>
+      <div class="menu-grid">
+
+        <!-- カード1 -->
+        <article class="menu-card reveal">
+          <div class="menu-card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" fill="#f5e6d3"/>
+              <path d="M24 14c0 0-8 5-8 12s8 8 8 8 8 0 8-8-8-12-8-12z" fill="#c9a87c" opacity="0.55"/>
+              <circle cx="24" cy="24" r="4" fill="#c9a87c"/>
+            </svg>
+          </div>
+          <h3 class="menu-card-title">ヒアルロン酸注射</h3>
+          <p class="menu-card-desc">
+            ほうれい線・涙袋・唇など、気になる部位にボリュームを与えます。自然な仕上がりで、ダウンタイムも少なく人気の施術です。
+          </p>
+          <ul class="menu-card-tags">
+            <li>ハリ・ふっくら</li>
+            <li>ほうれい線</li>
+            <li>即効性</li>
+          </ul>
+          <a href="#" class="btn btn--outline">詳しく見る</a>
+        </article>
+
+        <!-- カード2 -->
+        <article class="menu-card reveal reveal--delay">
+          <div class="menu-card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" fill="#f5e6d3"/>
+              <path d="M16 20 Q24 14 32 20 Q36 26 32 32 Q24 38 16 32 Q12 26 16 20z" fill="#c9a87c" opacity="0.45"/>
+              <path d="M24 20v8M20 24h8" stroke="#c9a87c" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="menu-card-title">ボトックス注射</h3>
+          <p class="menu-card-desc">
+            額・眉間・目尻などのシワを筋肉の動きを抑えることで改善します。エラ張り・小顔効果としても注目されています。
+          </p>
+          <ul class="menu-card-tags">
+            <li>シワ改善</li>
+            <li>小顔効果</li>
+            <li>リフトアップ</li>
+          </ul>
+          <a href="#" class="btn btn--outline">詳しく見る</a>
+        </article>
+
+        <!-- カード3 -->
+        <article class="menu-card reveal reveal--delay2">
+          <div class="menu-card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" fill="#f5e6d3"/>
+              <circle cx="24" cy="24" r="9" fill="none" stroke="#c9a87c" stroke-width="1.5" opacity="0.6"/>
+              <path d="M24 14 L25.8 21.5 L33.5 22.5 L27.5 28 L29.5 35.5 L24 31.5 L18.5 35.5 L20.5 28 L14.5 22.5 L22.2 21.5 Z" fill="#c9a87c" opacity="0.65"/>
+            </svg>
+          </div>
+          <h3 class="menu-card-title">レーザートーニング</h3>
+          <p class="menu-card-desc">
+            シミ・そばかす・肝斑などの色素沈着を改善します。肌のトーンを均一に整え、透明感のあるお肌へ導きます。
+          </p>
+          <ul class="menu-card-tags">
+            <li>シミ改善</li>
+            <li>美白</li>
+            <li>透明感</li>
+          </ul>
+          <a href="#" class="btn btn--outline">詳しく見る</a>
+        </article>
+
+        <!-- カード4 -->
+        <article class="menu-card reveal reveal--delay3">
+          <div class="menu-card-icon">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" fill="#f5e6d3"/>
+              <path d="M24 14 Q28 18 28 22 Q28 28 24 30 Q20 28 20 22 Q20 18 24 14Z" fill="#c9a87c" opacity="0.55"/>
+              <path d="M18 31 Q24 38 30 31" stroke="#c9a87c" stroke-width="1.5" fill="none"/>
+              <circle cx="24" cy="22" r="3" fill="white" opacity="0.8"/>
+            </svg>
+          </div>
+          <h3 class="menu-card-title">美白・点滴療法</h3>
+          <p class="menu-card-desc">
+            高濃度ビタミンCや美白成分を直接点滴で補給。内側からお肌を輝かせ、くすみ・シミ予防にも効果的です。
+          </p>
+          <ul class="menu-card-tags">
+            <li>美白点滴</li>
+            <li>くすみ改善</li>
+            <li>内側から輝く</li>
+          </ul>
+          <a href="#" class="btn btn--outline">詳しく見る</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== アクセス ===== -->
+  <section class="access" id="access">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">ACCESS</p>
+        <h2 class="section-title">アクセス</h2>
+      </div>
+      <div class="access-inner">
+        <!-- 地図プレースホルダー -->
+        <div class="access-map reveal">
+          <div class="map-placeholder">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="35" r="15" fill="#c9a87c" opacity="0.25"/>
+              <circle cx="40" cy="35" r="7" fill="#c9a87c" opacity="0.55"/>
+              <path d="M40 42 L40 60" stroke="#c9a87c" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+            <p>地図はこちらに表示されます</p>
+            <span>（Google Maps を埋め込み予定）</span>
+          </div>
+        </div>
+        <!-- アクセス情報 -->
+        <div class="access-info reveal reveal--delay">
+          <h3 class="access-clinic-name">〇〇美容皮膚科クリニック</h3>
+          <dl class="access-detail">
+            <dt>住所</dt>
+            <dd>〒000-0000<br />〇〇県〇〇市〇〇町0-0-0<br />〇〇ビル0F</dd>
+            <dt>電話</dt>
+            <dd>000-0000-0000</dd>
+            <dt>診療時間</dt>
+            <dd>
+              月〜金：10:00 〜 19:00<br />
+              土・日：10:00 〜 18:00<br />
+              <span class="access-closed">休診日：木曜日・祝日</span>
+            </dd>
+            <dt>アクセス</dt>
+            <dd>〇〇線「〇〇駅」徒歩0分</dd>
+          </dl>
+          <a href="tel:000-0000-0000" class="btn btn--primary">お電話でのご予約</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-main">〇〇 Beauty Clinic</span>
+          <span class="logo-sub">美容皮膚科</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="#hero">TOP</a>
+          <a href="#menu">施術メニュー</a>
+          <a href="#access">アクセス</a>
+        </nav>
+      </div>
+      <p class="footer-copy">&copy; 2026 〇〇美容皮膚科クリニック. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== チャットボット ===== -->
+  <div class="chatbot-wrapper" id="chatbot">
+    <!-- トグルボタン -->
+    <button class="chatbot-toggle" id="chatbotToggle" aria-label="チャットボットを開く">
+      <svg class="chatbot-toggle-icon chatbot-toggle-icon--open" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="currentColor"/>
+        <circle cx="8" cy="10" r="1.5" fill="white"/>
+        <circle cx="12" cy="10" r="1.5" fill="white"/>
+        <circle cx="16" cy="10" r="1.5" fill="white"/>
+      </svg>
+      <svg class="chatbot-toggle-icon chatbot-toggle-icon--close" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+
+    <!-- チャットウィンドウ -->
+    <div class="chatbot-window" id="chatbotWindow" aria-hidden="true">
+      <div class="chatbot-header">
+        <div class="chatbot-header-avatar">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="16" cy="16" r="16" fill="#f5e6d3"/>
+            <circle cx="16" cy="13" r="5" fill="#c9a87c" opacity="0.8"/>
+            <path d="M8 26c0-4.4 3.6-8 8-8s8 3.6 8 8" fill="#c9a87c" opacity="0.5"/>
+          </svg>
+        </div>
+        <div>
+          <p class="chatbot-header-name">クリニックサポート</p>
+          <p class="chatbot-header-status">オンライン</p>
+        </div>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages"></div>
+      <div class="chatbot-choices" id="chatbotChoices"></div>
+    </div>
+  </div>
+
+  <script src="chatbot.js"></script>
+</body>
+</html>
