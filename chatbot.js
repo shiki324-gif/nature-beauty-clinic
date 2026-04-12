@@ -5,157 +5,184 @@
 
 /* =============================================
    FAQ データ定義（選択式ショートカット）
+   ※ dify_quick_reply_master.csv をベースに構成
    ============================================= */
 const FAQ_TREE = {
+
+  /* ── スタート ── */
   root: {
-    message: 'こんにちは！〇〇美容皮膚科クリニックのAIアシスタントです😊\nご質問をお気軽にどうぞ。よく聞かれる質問はボタンからもお選びいただけます。',
+    message: 'こんにちは！美容皮膚科クリニックのAIアシスタントです😊\nご質問をお気軽にどうぞ。よく聞かれる質問はボタンからもお選びいただけます。',
     choices: [
-      { label: '💉 施術の効果について',    next: 'effect'    },
-      { label: '🗓 ダウンタイムについて',  next: 'downtime'  },
-      { label: '🌿 施術後のケアについて',  next: 'aftercare' },
-      { label: '📅 診療時間・予約について', next: 'schedule'  },
-      { label: '💴 料金・保険について',    next: 'price'     },
+      { label: '💉 施術について知りたい',     next: 'treatment'   },
+      { label: '💴 料金について知りたい',     next: 'price'       },
+      { label: '😟 痛み・ダウンタイムが不安', next: 'pain'        },
+      { label: '📅 予約・来院について',       next: 'reservation' },
     ],
   },
 
-  effect: {
-    message: 'どの施術の効果についてお知りになりたいですか？',
+  /* ── 施術について ── */
+  treatment: {
+    message: '施術について、何を知りたいですか？',
     choices: [
-      { label: 'ヒアルロン酸注射',   next: 'effect_ha'    },
-      { label: 'ボトックス注射',      next: 'effect_btx'   },
-      { label: 'レーザートーニング', next: 'effect_laser'  },
-      { label: '美白・点滴療法',      next: 'effect_drip'  },
-      { label: '← 最初に戻る',       next: 'root'         },
+      { label: 'どんな施術が合うか知りたい',   next: 'treatment_match'    },
+      { label: '施術時間や回数を知りたい',     next: 'treatment_duration' },
+      { label: '痛みやダウンタイムを知りたい', next: 'pain'               },
+      { label: 'まだ決まっていない',           next: 'treatment_undecided'},
+      { label: '← 最初に戻る',               next: 'root'               },
     ],
   },
-  effect_ha: {
-    message: 'ヒアルロン酸注射は、ほうれい線・涙袋・唇などにボリュームを与える施術です。\n\n✅ 効果：施術直後から実感できます。持続は部位・種類により6ヶ月〜2年程度。\nカウンセリングで詳しくご説明します。',
+  treatment_match: {
+    message: 'お悩みやご希望によって適した施術は異なります。\nシミ・ニキビ・毛穴・くすみ・肌質改善など、さまざまなお悩みに対応できる施術をご用意しています。\n\n当院では無理に施術をおすすめすることはありません。お気軽にカウンセリングでご相談ください😊',
     choices: [
-      { label: 'ダウンタイムも知りたい', next: 'dt_ha'  },
-      { label: '他の施術を見る',        next: 'effect'  },
-      { label: '← 最初に戻る',         next: 'root'    },
+      { label: '施術時間や回数も知りたい', next: 'treatment_duration' },
+      { label: '予約・来院について',       next: 'reservation'        },
+      { label: '← 最初に戻る',           next: 'root'               },
     ],
   },
-  effect_btx: {
-    message: 'ボトックス注射は、筋肉の動きを抑えシワを改善する施術です。\n\n✅ 効果：施術後3〜7日で現れ、3〜6ヶ月持続します。エラ張り・小顔効果にも人気です。',
+  treatment_duration: {
+    message: '【施術時間】\nカウンセリングを含めて30分〜1時間程度が目安です。初診時は説明の時間を多めに確保しています。\n\n【通院回数】\n目的やお悩みの程度によって異なります。複数回を前提とするケースが多いですが、無理のないペースでご案内します。\n\n詳しくはカウンセリングでご案内します。',
     choices: [
-      { label: 'ダウンタイムも知りたい', next: 'dt_btx' },
-      { label: '他の施術を見る',        next: 'effect'  },
-      { label: '← 最初に戻る',         next: 'root'    },
+      { label: '料金について知りたい', next: 'price'       },
+      { label: '予約を検討する',       next: 'reservation' },
+      { label: '← 最初に戻る',       next: 'root'        },
     ],
   },
-  effect_laser: {
-    message: 'レーザートーニングは、シミ・そばかす・肝斑などを改善するレーザー施術です。\n\n✅ 効果：5〜10回の施術で効果を実感する方が多いです。透明感のあるお肌へ導きます。',
+  treatment_undecided: {
+    message: '施術がまだ決まっていない方も大歓迎です😊\nまずはお悩みをお聞きし、一般的な選択肢をご案内します。肌状態によって適した施術は異なるため、医師によるカウンセリングで丁寧にご説明します。\n\n無理に施術をおすすめすることはありませんのでご安心ください。',
     choices: [
-      { label: 'ダウンタイムも知りたい', next: 'dt_laser' },
-      { label: '他の施術を見る',        next: 'effect'    },
-      { label: '← 最初に戻る',         next: 'root'      },
-    ],
-  },
-  effect_drip: {
-    message: '美白・点滴療法は、高濃度ビタミンCや美白成分を直接点滴で補給する施術です。\n\n✅ 効果：くすみ改善・肌トーンアップを実感される方が多いです。1〜2週間に1回がおすすめです。',
-    choices: [
-      { label: 'ダウンタイムも知りたい', next: 'dt_drip' },
-      { label: '他の施術を見る',        next: 'effect'   },
-      { label: '← 最初に戻る',         next: 'root'     },
+      { label: '予約・来院について', next: 'reservation' },
+      { label: '施術内容を詳しく',   next: 'treatment'   },
+      { label: '← 最初に戻る',     next: 'root'        },
     ],
   },
 
-  downtime: {
-    message: 'どの施術のダウンタイムについてお知りになりたいですか？',
-    choices: [
-      { label: 'ヒアルロン酸注射',   next: 'dt_ha'    },
-      { label: 'ボトックス注射',      next: 'dt_btx'   },
-      { label: 'レーザートーニング', next: 'dt_laser'  },
-      { label: '美白・点滴療法',      next: 'dt_drip'  },
-      { label: '← 最初に戻る',       next: 'root'     },
-    ],
-  },
-  dt_ha: {
-    message: 'ヒアルロン酸注射のダウンタイム：\n💧 内出血・腫れ：数日〜1週間程度\n💧 針跡：翌日にはほぼ目立ちません\n\n大きな行事の1〜2週間前の施術をおすすめします。',
-    choices: [
-      { label: '施術後のケアを知りたい', next: 'ac_ha'    },
-      { label: '他のダウンタイムを見る', next: 'downtime' },
-      { label: '← 最初に戻る',          next: 'root'     },
-    ],
-  },
-  dt_btx: {
-    message: 'ボトックス注射のダウンタイム：\n💧 赤み・腫れ：数時間〜翌日程度\n💧 内出血：稀に数日続く場合があります\n\n当日はメイク可能です。',
-    choices: [
-      { label: '施術後のケアを知りたい', next: 'ac_btx'   },
-      { label: '他のダウンタイムを見る', next: 'downtime' },
-      { label: '← 最初に戻る',          next: 'root'     },
-    ],
-  },
-  dt_laser: {
-    message: 'レーザートーニングのダウンタイム：\n💧 赤み・ほてり：施術後数時間で落ち着くことが多いです\n💧 ほぼダウンタイムなしで受けられます\n\n施術当日から洗顔・メイク可能な場合が多いです。',
-    choices: [
-      { label: '施術後のケアを知りたい', next: 'ac_laser' },
-      { label: '他のダウンタイムを見る', next: 'downtime' },
-      { label: '← 最初に戻る',          next: 'root'     },
-    ],
-  },
-  dt_drip: {
-    message: '美白・点滴療法のダウンタイム：\n💧 ほとんどありません\n💧 針跡が残る場合がありますが、すぐに目立たなくなります\n\nお仕事の合間にも受けていただけます。',
-    choices: [
-      { label: '施術後のケアを知りたい', next: 'ac_drip'  },
-      { label: '他のダウンタイムを見る', next: 'downtime' },
-      { label: '← 最初に戻る',          next: 'root'     },
-    ],
-  },
-
-  aftercare: {
-    message: 'どの施術のアフターケアについてお知りになりたいですか？',
-    choices: [
-      { label: 'ヒアルロン酸注射',   next: 'ac_ha'    },
-      { label: 'ボトックス注射',      next: 'ac_btx'   },
-      { label: 'レーザートーニング', next: 'ac_laser'  },
-      { label: '美白・点滴療法',      next: 'ac_drip'  },
-      { label: '← 最初に戻る',       next: 'root'     },
-    ],
-  },
-  ac_ha: {
-    message: 'ヒアルロン酸注射後のケア：\n🌿 注射部位を強くマッサージしない\n🌿 当日は飲酒・激しい運動・長時間入浴を控える\n🌿 保湿をしっかり行う',
-    choices: [
-      { label: '他のケアを見る', next: 'aftercare' },
-      { label: '← 最初に戻る',  next: 'root'      },
-    ],
-  },
-  ac_btx: {
-    message: 'ボトックス注射後のケア：\n🌿 施術後4時間は横にならない（顔面部位）\n🌿 当日はサウナ・激しい運動・飲酒を控える\n🌿 注射部位を強く押さない',
-    choices: [
-      { label: '他のケアを見る', next: 'aftercare' },
-      { label: '← 最初に戻る',  next: 'root'      },
-    ],
-  },
-  ac_laser: {
-    message: 'レーザートーニング後のケア：\n🌿 日焼け止めを必ず使用する（UVケアが最重要）\n🌿 保湿をしっかり行う\n🌿 こすったり刺激を与えない',
-    choices: [
-      { label: '他のケアを見る', next: 'aftercare' },
-      { label: '← 最初に戻る',  next: 'root'      },
-    ],
-  },
-  ac_drip: {
-    message: '点滴療法後のケア：\n🌿 特別な制限はほとんどありません\n🌿 水分をしっかり摂るとより効果的です\n🌿 定期的に通院することで効果が持続しやすくなります',
-    choices: [
-      { label: '他のケアを見る', next: 'aftercare' },
-      { label: '← 最初に戻る',  next: 'root'      },
-    ],
-  },
-
-  schedule: {
-    message: '【診療時間】\n月〜金：10:00 〜 19:00\n土・日：10:00 〜 18:00\n休診日：木曜日・祝日\n\n【ご予約方法】\nお電話（000-0000-0000）またはWebフォームよりご予約ください。初診の方も大歓迎です😊',
-    choices: [
-      { label: '料金について知りたい', next: 'price' },
-      { label: '← 最初に戻る',        next: 'root'  },
-    ],
-  },
-
+  /* ── 料金について ── */
   price: {
-    message: '当クリニックの施術は、すべて自由診療（保険適用外）となります。\n\n💴 料金は施術内容・量により異なります。\n📋 無料カウンセリングにてお気軽にご相談ください。',
+    message: '料金について、何を知りたいですか？',
     choices: [
-      { label: '診療時間・予約を知りたい', next: 'schedule' },
-      { label: '← 最初に戻る',            next: 'root'     },
+      { label: '施術の料金を知りたい',            next: 'price_basic'    },
+      { label: '初診料・カウンセリング料について', next: 'price_first'    },
+      { label: 'キャンペーン・初回割引について',  next: 'price_campaign' },
+      { label: '支払い方法について',              next: 'price_payment'  },
+      { label: '← 最初に戻る',                  next: 'root'           },
+    ],
+  },
+  price_basic: {
+    message: '料金は施術内容によって異なります。通常料金・初回料金・セット料金などをご用意しています。\n\n✅ 美容目的の施術はすべて自由診療（保険適用外）です。\n\n具体的な金額はカウンセリングでご案内します。追加費用が発生する場合（麻酔代等）は事前にご説明します。',
+    choices: [
+      { label: 'キャンペーンについて', next: 'price_campaign' },
+      { label: '支払い方法を知りたい', next: 'price_payment'  },
+      { label: '← 最初に戻る',       next: 'root'           },
+    ],
+  },
+  price_first: {
+    message: '初診料・カウンセリング料は、無料の場合と有料の場合があります。\n費用が発生する場合は事前にご案内しておりますのでご安心ください。\n\n期間限定の割引により無料となる場合もあります。詳細はお問い合わせください。',
+    choices: [
+      { label: 'キャンペーンについて', next: 'price_campaign' },
+      { label: '予約を検討する',       next: 'reservation'   },
+      { label: '← 最初に戻る',       next: 'root'           },
+    ],
+  },
+  price_campaign: {
+    message: '期間限定キャンペーンや初回割引を実施する場合があります。\n最新情報は公式サイトや受付でご確認いただけます。\n\n無理に勧めることはありませんのでご安心ください😊',
+    choices: [
+      { label: '料金全般を知りたい', next: 'price_basic'  },
+      { label: '予約を検討する',     next: 'reservation'  },
+      { label: '← 最初に戻る',     next: 'root'         },
+    ],
+  },
+  price_payment: {
+    message: '💳 現金・クレジットカード・電子マネー・QR決済など、複数の支払い方法をご利用いただけます。\n\n施術内容によっては分割払いや医療ローンを利用できる場合もあります（審査あり）。\n無理なご案内はいたしませんのでご安心ください。',
+    choices: [
+      { label: '料金について詳しく', next: 'price_basic' },
+      { label: '予約を検討する',     next: 'reservation' },
+      { label: '← 最初に戻る',     next: 'root'        },
+    ],
+  },
+
+  /* ── 痛み・ダウンタイム ── */
+  pain: {
+    message: '痛み・ダウンタイムについて、何が気になりますか？',
+    choices: [
+      { label: '痛みはどれくらいありますか？', next: 'pain_level'  },
+      { label: 'ダウンタイムはありますか？',   next: 'downtime'    },
+      { label: '仕事や生活への影響が心配',     next: 'pain_daily'  },
+      { label: '施術後の注意点を知りたい',     next: 'aftercare'   },
+      { label: '← 最初に戻る',               next: 'root'        },
+    ],
+  },
+  pain_level: {
+    message: '痛みの感じ方には個人差がありますが、一般的には軽い刺激やチクチク感を感じる程度とされています。\n\n必要に応じて麻酔を使用する場合もあります。痛みが心配な方もお気軽にお伝えください。無理に我慢していただくことはありません😊',
+    choices: [
+      { label: 'ダウンタイムも知りたい', next: 'downtime'    },
+      { label: '予約を検討する',         next: 'reservation' },
+      { label: '← 最初に戻る',         next: 'root'        },
+    ],
+  },
+  downtime: {
+    message: 'ダウンタイムは施術内容によって異なります。\n\n💧 一般的には赤みやヒリつきが一時的に出る場合があります\n💧 多くは数時間〜数日で落ち着くケースが一般的です\n💧 生活への影響には個人差があります\n\n詳しくは医師によるカウンセリングでご案内します。',
+    choices: [
+      { label: '仕事への影響が心配',     next: 'pain_daily'  },
+      { label: '施術後の注意点を知りたい', next: 'aftercare'  },
+      { label: '← 最初に戻る',          next: 'root'        },
+    ],
+  },
+  pain_daily: {
+    message: '施術によっては当日から通常の日常生活が可能な場合もありますが、内容によって注意点が異なります。\n\n大切な予定（撮影・イベント等）がある場合は事前にご相談ください。生活スタイルに合わせてご案内します。',
+    choices: [
+      { label: '施術後の注意点を知りたい', next: 'aftercare'   },
+      { label: '予約を検討する',           next: 'reservation' },
+      { label: '← 最初に戻る',           next: 'root'        },
+    ],
+  },
+  aftercare: {
+    message: '【施術後のポイント】\n🌿 紫外線対策（日焼け止め）は必須です\n🌿 保湿をしっかり行ってください\n🌿 当日は飲酒・激しい運動・長時間入浴を控える\n🌿 刺激の強いスキンケア成分は一時的に控える\n🌿 気になる症状があれば早めにご連絡ください\n\n詳細は施術当日にスタッフが丁寧にご説明します。',
+    choices: [
+      { label: '予約を検討する', next: 'reservation' },
+      { label: '← 最初に戻る', next: 'root'        },
+    ],
+  },
+
+  /* ── 予約・来院 ── */
+  reservation: {
+    message: '予約・来院について、何を知りたいですか？',
+    choices: [
+      { label: '予約方法を知りたい',       next: 'reservation_how'   },
+      { label: '当日の予約はできますか？', next: 'reservation_today' },
+      { label: '来院時の流れを知りたい',   next: 'visit_flow'        },
+      { label: '持ち物・メイクについて',   next: 'visit_items'       },
+      { label: '← 最初に戻る',           next: 'root'              },
+    ],
+  },
+  reservation_how: {
+    message: '📱 予約は公式サイトの予約ページから24時間いつでもお手続きいただけます。スマートフォンからも簡単にご予約いただけます。\n\nキャンセル・変更も予約ページまたはお問い合わせ窓口から手続き可能です。できるだけ早めにご連絡ください。',
+    choices: [
+      { label: '当日予約はできますか？', next: 'reservation_today' },
+      { label: '来院時の流れを知りたい', next: 'visit_flow'        },
+      { label: '← 最初に戻る',         next: 'root'              },
+    ],
+  },
+  reservation_today: {
+    message: '当日のご予約は空き状況によって可能な場合があります。公式サイトの予約ページから最新の空き枠をご確認いただくか、直接お問い合わせください。\n\n当院は原則予約制のため、事前のご予約をおすすめします。',
+    choices: [
+      { label: '来院時の流れを知りたい', next: 'visit_flow'   },
+      { label: '← 最初に戻る',         next: 'root'         },
+    ],
+  },
+  visit_flow: {
+    message: '【初診の流れ】\n① 受付・カウンセリングシート記入\n② カウンセラーがお悩みをヒアリング\n③ 医師が肌状態を確認\n④ 施術内容・注意点のご説明\n⑤ ご納得いただけた場合に施術へ\n\n✅ 無理に当日施術を行うことはありません\n✅ 所要時間は1〜1.5時間程度が目安です',
+    choices: [
+      { label: '持ち物・メイクについて', next: 'visit_items'       },
+      { label: '予約方法を知りたい',     next: 'reservation_how'   },
+      { label: '← 最初に戻る',         next: 'root'              },
+    ],
+  },
+  visit_items: {
+    message: '【お持ち物】\n📄 身分証明書（免許証・保険証など）\n💳 クレジットカード（ご利用の場合）\n👓 コンタクトレンズ使用の方はケース\n\n【メイクについて】\nメイクをしたままご来院いただいて問題ありません。施術前に必要な場合は院内でメイクオフをご案内します。',
+    choices: [
+      { label: '来院時の流れを知りたい', next: 'visit_flow'      },
+      { label: '予約方法を知りたい',     next: 'reservation_how' },
+      { label: '← 最初に戻る',         next: 'root'            },
     ],
   },
 };
@@ -359,23 +386,39 @@ class Chatbot {
   }
 
   /* =============================================
-     返答後のショートカットボタン
+     返答後のショートカットボタン（補助ボタン）
+     ※ dify_quick_reply_master.csv「補助」ステージに対応
      ============================================= */
   _showReturnChoices() {
     this.choices.innerHTML = '';
 
     const shortcuts = [
-      { label: '他にも質問する',          action: () => { this.choices.innerHTML = ''; this.input.focus(); } },
-      { label: '💉 施術について',          action: () => this._goTo('effect')   },
-      { label: '📅 診療時間・予約',        action: () => this._goTo('schedule') },
+      {
+        label: 'ほかの質問もしたい',
+        action: () => { this.choices.innerHTML = ''; this.input.focus(); },
+        isText: true,
+      },
+      {
+        label: 'カウンセリングについて知りたい',
+        action: () => this._goTo('visit_flow'),
+      },
+      {
+        label: '💉 施術について',
+        action: () => this._goTo('treatment'),
+      },
+      {
+        label: '📅 予約・来院について',
+        action: () => this._goTo('reservation'),
+      },
     ];
 
-    shortcuts.forEach(({ label, action }) => {
+    shortcuts.forEach(({ label, action, isText }) => {
       const btn = document.createElement('button');
       btn.className = 'choice-btn';
       btn.textContent = label;
       btn.addEventListener('click', () => {
-        if (label !== '他にも質問する') {
+        /* 「ほかの質問もしたい」はユーザーメッセージとして表示しない */
+        if (!isText) {
           this.conversationHistory.push({ role: 'user', content: label });
           this._addUserMessage(label);
         }
