@@ -523,28 +523,17 @@ ul  { list-style: none; }
   aspect-ratio: 4/3;
 }
 
-.concept-image-bg {
+/* 施術イメージ写真 */
+.concept-image-photo {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #f5e6d3 0%, #ecdcca 50%, #e0cdb5 100%);
-  position: relative;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s ease;
 }
-.concept-image-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 30% 40%, rgba(201,168,124,0.2) 0%, transparent 50%),
-    radial-gradient(circle at 70% 70%, rgba(245,230,211,0.4) 0%, transparent 50%);
-}
-.concept-image-bg::after {
-  content: '✿';
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 5rem;
-  color: rgba(201,168,124,0.25);
-  letter-spacing: 0.3em;
+.concept-image-inner:hover .concept-image-photo {
+  transform: scale(1.04); /* ホバーでゆるくズームイン */
 }
 
 .concept-badge {
