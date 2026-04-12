@@ -32,11 +32,47 @@ const FAQ_TREE = {
     ],
   },
   treatment_match: {
-    message: 'お悩みやご希望によって適した施術は異なります。\nシミ・ニキビ・毛穴・くすみ・肌質改善など、さまざまなお悩みに対応できる施術をご用意しています。\n\n当院では無理に施術をおすすめすることはありません。お気軽にカウンセリングでご相談ください😊',
+    message: 'どのような施術に興味がありますか？',
     choices: [
-      { label: '施術時間や回数も知りたい', next: 'treatment_duration' },
-      { label: '予約・来院について',       next: 'reservation'        },
-      { label: '← 最初に戻る',           next: 'root'               },
+      { label: '💉 注射系（ヒアルロン酸・ボトックス）', next: 'treatment_injection' },
+      { label: '🌟 医療脱毛',                           next: 'treatment_hair'      },
+      { label: '✨ レーザートーニング',                 next: 'treatment_laser'     },
+      { label: '💧 美白・点滴療法',                     next: 'treatment_drip'      },
+      { label: '← 最初に戻る',                         next: 'root'               },
+    ],
+  },
+  treatment_injection: {
+    message: '【注射系施術】\n\n💉 ヒアルロン酸注射\nほうれい線・涙袋・唇などにボリュームを補充。施術直後から自然なハリ感を実感できます。\n\n💉 ボトックス注射\n額・眉間・目尻のシワ改善や、エラ張り・小顔効果に人気。3〜6ヶ月の持続が目安です。\n\nどちらもダウンタイムが少なく、日常生活への影響が少ない施術です。',
+    choices: [
+      { label: 'ダウンタイムを知りたい',   next: 'pain'        },
+      { label: '料金について知りたい',     next: 'price'       },
+      { label: '予約を検討する',           next: 'reservation' },
+      { label: '← 施術一覧に戻る',       next: 'treatment_match' },
+    ],
+  },
+  treatment_hair: {
+    message: '【医療脱毛】\n\n🌟 医療用レーザーで毛根にダイレクトにアプローチします。\n\n✅ 持続的な脱毛効果で繰り返しの自己処理が不要に\n✅ 全身・顔・VIOなど幅広い部位に対応\n✅ 美肌効果も期待できます\n\n回数・料金は部位や毛量によって異なりますので、カウンセリングで詳しくご案内します。',
+    choices: [
+      { label: 'ダウンタイムを知りたい', next: 'pain'        },
+      { label: '料金について知りたい',   next: 'price'       },
+      { label: '予約を検討する',         next: 'reservation' },
+      { label: '← 施術一覧に戻る',     next: 'treatment_match' },
+    ],
+  },
+  treatment_laser: {
+    message: '【レーザートーニング】\n\n✨ シミ・そばかす・肝斑などの色素沈着を改善し、肌のトーンを均一に整えます。\n\n✅ 透明感のある明るいお肌へ\n✅ ダウンタイムが少なく通いやすい\n✅ 複数回（目安5〜10回）の施術で効果を実感される方が多いです\n\n詳しくは医師によるカウンセリングでご案内します。',
+    choices: [
+      { label: '料金について知りたい', next: 'price'       },
+      { label: '予約を検討する',       next: 'reservation' },
+      { label: '← 施術一覧に戻る',   next: 'treatment_match' },
+    ],
+  },
+  treatment_drip: {
+    message: '【美白・点滴療法】\n\n💧 高濃度ビタミンCや美白成分を点滴で直接補給します。\n\n✅ 内側からお肌を輝かせてくすみ改善\n✅ ダウンタイムがほぼなし\n✅ 1〜2週間に1回のペースで効果維持しやすい\n\nお仕事の合間にも受けていただけます。詳しくはカウンセリングにてご案内します。',
+    choices: [
+      { label: '料金について知りたい', next: 'price'       },
+      { label: '予約を検討する',       next: 'reservation' },
+      { label: '← 施術一覧に戻る',   next: 'treatment_match' },
     ],
   },
   treatment_duration: {
