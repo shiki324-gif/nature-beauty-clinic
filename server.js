@@ -316,10 +316,15 @@ app.get('*', (req, res) => {
 });
 
 /* =============================================
-   サーバー起動
+   サーバー起動（ローカル開発時のみ listen）
    ============================================= */
-app.listen(PORT, () => {
-  console.log(`✨ 美容皮膚科クリニック HP サーバー起動`);
-  console.log(`🌐 http://localhost:${PORT}`);
-  console.log(`📌 ANTHROPIC_API_KEY: ${process.env.ANTHROPIC_API_KEY ? '設定済み ✓' : '未設定 ✗ (.env または環境変数を設定してください)'}`);
-});
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`✨ 美容皮膚科クリニック HP サーバー起動`);
+    console.log(`🌐 http://localhost:${PORT}`);
+    console.log(`📌 ANTHROPIC_API_KEY: ${process.env.ANTHROPIC_API_KEY ? '設定済み ✓' : '未設定 ✗ (.env または環境変数を設定してください)'}`);
+  });
+}
+
+/* Vercel サーバーレス関数としてエクスポート */
+module.exports = app;
