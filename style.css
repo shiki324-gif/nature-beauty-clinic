@@ -520,15 +520,14 @@ ul  { list-style: none; }
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  aspect-ratio: 4/3;
+  background: #f9f5f0; /* 余白部分の背景色 */
 }
 
 /* 施術イメージ写真 */
 .concept-image-photo {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  object-fit: contain;
   display: block;
   transition: transform 0.6s ease;
 }
@@ -539,7 +538,7 @@ ul  { list-style: none; }
 .concept-badge {
   position: absolute;
   bottom: 1.5rem;
-  right: 1.5rem;
+  left: 1.5rem;
   background: var(--color-white);
   border-radius: 12px;
   padding: 0.8rem 1.2rem;
@@ -619,6 +618,15 @@ ul  { list-style: none; }
 }
 .menu-card:hover .menu-card-image img {
   transform: scale(1.06);
+}
+
+/* 画像全体を収めるバリアント（縦長・正方形画像用） */
+.menu-card-image--contain img {
+  object-fit: contain;
+  background: #f9f5f0;
+}
+.menu-card-image--contain {
+  background: #f9f5f0;
 }
 
 /* カード本文エリア */

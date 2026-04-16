@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高濃度ビタミンC・白玉点滴 | ナチュレ美容皮膚科クリニック</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== パンくずリスト ===== */
+    .breadcrumb {
+      background: var(--color-bg-alt);
+      padding: 0.75rem 0;
+      margin-top: 64px;
+    }
+    .breadcrumb-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--color-text-lt);
+    }
+    .breadcrumb-list li { display: flex; align-items: center; gap: 0.25rem; }
+    .breadcrumb-list a { color: var(--color-accent); transition: color var(--transition); }
+    .breadcrumb-list a:hover { color: var(--color-accent-dk); }
+    .breadcrumb-list .sep { color: var(--color-border); }
+
+    /* ===== ヒーローセクション ===== */
+    .detail-hero {
+      position: relative;
+      height: clamp(320px, 50vw, 520px);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-warm); /* 画像フォールバック */
+    }
+    .detail-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .detail-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(30,20,50,0.20) 0%,
+        rgba(30,20,50,0.58) 100%
+      );
+    }
+    .detail-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--color-white);
+      padding: 0 var(--sp-sm);
+    }
+    .detail-hero-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      background: rgba(201,168,124,0.75);
+      color: #fff;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .detail-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 4.5vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.30);
+      margin-bottom: 0.75rem;
+    }
+    .detail-hero-catch {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      opacity: 0.92;
+    }
+
+    /* ===== 共通コンテンツ ===== */
+    .detail-section {
+      padding: var(--sp-lg) 0;
+    }
+    .detail-section + .detail-section {
+      border-top: 1px solid var(--color-border);
+    }
+    .detail-section--alt  { background: var(--color-bg-alt); }
+    .detail-section--warm { background: var(--color-bg-warm); }
+
+    .detail-section-head {
+      margin-bottom: 2.5rem;
+    }
+    .detail-section-head .section-label { margin-bottom: 0.4rem; }
+    .detail-section-head .section-title { margin-bottom: 0.6rem; }
+
+    .overview-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-text);
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ===== 2種類の点滴カード ===== */
+    .drip-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-bottom: 0;
+    }
+    @media (min-width: 640px) {
+      .drip-cards { grid-template-columns: repeat(2, 1fr); }
+    }
+    .drip-card {
+      background: var(--color-white);
+      border: 1.5px solid var(--color-border);
+      border-radius: 20px;
+      padding: 2rem 1.75rem;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .drip-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-accent), var(--color-accent-dk));
+    }
+    .drip-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    .drip-card-icon { width: 60px; height: 60px; margin-bottom: 1.25rem; }
+    .drip-card-name {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+    .drip-card-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-lt);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .drip-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .drip-card-tag {
+      font-size: 0.75rem;
+      background: var(--color-bg-warm);
+      color: var(--color-accent-dk);
+      border: 1px solid var(--color-border);
+      border-radius: 50px;
+      padding: 0.25rem 0.75rem;
+      font-weight: 500;
+    }
+
+    /* ===== 特徴カード ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 600px) {
+      .feature-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .feature-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-card-icon { width: 56px; height: 56px; margin: 0 auto 1rem; }
+    .feature-card-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    .feature-card-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-lt);
+      line-height: 1.75;
+    }
+
+    /* ===== お悩み ===== */
+    .worry-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      max-width: 720px;
+    }
+    @media (min-width: 600px) {
+      .worry-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .worry-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--color-white);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid var(--color-border);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--color-text);
+    }
+    .worry-check {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .worry-check svg { width: 11px; height: 11px; }
+
+    /* ===== 施術の流れ ===== */
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      max-width: 680px;
+    }
+    .flow-item {
+      display: flex;
+      gap: 1.25rem;
+      position: relative;
+    }
+    .flow-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 48px;
+      width: 2px;
+      height: calc(100% - 12px);
+      background: var(--color-border);
+    }
+    .flow-num {
+      flex-shrink: 0;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(201,168,124,0.35);
+      position: relative;
+      z-index: 1;
+    }
+    .flow-body { padding: 0.2rem 0 2rem; }
+    .flow-item:last-child .flow-body { padding-bottom: 0; }
+    .flow-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.35rem;
+    }
+    .flow-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-lt);
+      line-height: 1.75;
+    }
+
+    /* ===== 料金表 ===== */
+    .price-table {
+      width: 100%;
+      max-width: 680px;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .price-table th, .price-table td {
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .price-table thead th {
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+    .price-table thead th:first-child { border-radius: 8px 0 0 0; }
+    .price-table thead th:last-child  { border-radius: 0 8px 0 0; }
+    .price-table tbody tr:last-child td { border-bottom: none; }
+    .price-table tbody tr:nth-child(even) td { background: var(--color-bg-alt); }
+    .price-note {
+      font-size: 0.78rem;
+      color: var(--color-text-lt);
+      margin-top: 0.75rem;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-list {
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-white);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: background var(--transition);
+    }
+    .faq-question:hover { background: var(--color-bg-alt); }
+    .faq-q-badge {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .faq-q-text { flex: 1; }
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      transition: transform var(--transition);
+    }
+    .faq-item.is-open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.is-open .faq-answer { max-height: 400px; }
+    .faq-answer-inner {
+      padding: 0 1.25rem 1.1rem 3.5rem;
+      font-size: 0.86rem;
+      color: var(--color-text-lt);
+      line-height: 1.85;
+    }
+
+    /* ===== 予約CTA ===== */
+    .cta-section {
+      background: var(--color-bg-warm);
+      padding: var(--sp-lg) 0;
+      text-align: center;
+    }
+    .cta-section .section-title { margin-bottom: 0.5rem; }
+    .cta-section .section-desc { margin: 0 auto 2rem; }
+    .cta-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn--phone {
+      background: var(--color-white);
+      color: var(--color-accent-dk);
+      border-color: var(--color-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn--phone:hover {
+      background: var(--color-accent);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+    .btn--reserve {
+      background: var(--color-accent);
+      color: var(--color-white);
+      border-color: var(--color-accent);
+    }
+    .btn--reserve:hover {
+      background: var(--color-accent-dk);
+      border-color: var(--color-accent-dk);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-main">NATURE Beauty Clinic</span>
+        <span class="logo-sub">美容皮膚科</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">TOP</a></li>
+          <li><a href="index.html#menu" class="nav-link">施術メニュー</a></li>
+          <li><a href="index.html#access" class="nav-link">アクセス</a></li>
+          <li><a href="#" class="nav-link nav-cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== パンくずリスト ===== -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <div class="container">
+      <ol class="breadcrumb-list">
+        <li><a href="index.html">TOP</a></li>
+        <li><span class="sep">›</span></li>
+        <li><a href="index.html#menu">施術メニュー</a></li>
+        <li><span class="sep">›</span></li>
+        <li>高濃度ビタミンC・白玉点滴</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ===== ヒーローセクション ===== -->
+  <section class="detail-hero">
+    <img
+      class="detail-hero-img"
+      src="ChatGPT Image 2026年4月16日 21_26_35.png"
+      alt="高濃度ビタミンC・白玉点滴の施術イメージ"
+    />
+    <div class="detail-hero-overlay"></div>
+    <div class="detail-hero-content">
+      <span class="detail-hero-label">VITAMIN DRIP</span>
+      <h1 class="detail-hero-title">高濃度ビタミンC・<br />白玉点滴</h1>
+      <p class="detail-hero-catch">内側から満たす、透き通るような美しさへ。</p>
+    </div>
+  </section>
+
+  <!-- ===== 施術概要 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">OVERVIEW</p>
+        <h2 class="section-title">施術概要</h2>
+      </div>
+      <p class="overview-text reveal">
+        美容点滴は、美容成分を直接静脈に点滴投与することで、内側から効率よく肌へ届ける施術です。経口サプリメントに比べて吸収率が格段に高く、即効性が期待できます。当クリニックでは「高濃度ビタミンC点滴」と「白玉点滴（グルタチオン）」の2種類をご用意しており、それぞれの美容効果を組み合わせて施術することも可能です。
+      </p>
+
+      <!-- 2種類の点滴カード -->
+      <div class="drip-cards">
+        <div class="drip-card reveal">
+          <div class="drip-card-icon">
+            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="30" fill="#f5e6d3"/>
+              <path d="M30 15 Q36 20 36 26 Q36 34 30 37 Q24 34 24 26 Q24 20 30 15Z" fill="#c9a87c" opacity="0.6"/>
+              <circle cx="30" cy="26" r="4" fill="white" opacity="0.85"/>
+              <path d="M24 40 Q30 46 36 40" stroke="#c9a87c" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="drip-card-name">高濃度ビタミンC点滴</p>
+          <p class="drip-card-desc">
+            通常の内服では摂取できないほどの高濃度ビタミンCを直接血管へ投与。強力な抗酸化作用でシミ・くすみを予防し、コラーゲン生成を促進します。免疫力の向上や疲労回復にも効果的です。
+          </p>
+          <div class="drip-card-tags">
+            <span class="drip-card-tag">美白・シミ予防</span>
+            <span class="drip-card-tag">抗酸化</span>
+            <span class="drip-card-tag">免疫力向上</span>
+          </div>
+        </div>
+        <div class="drip-card reveal reveal--delay">
+          <div class="drip-card-icon">
+            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="30" fill="#f5e6d3"/>
+              <circle cx="30" cy="30" r="12" fill="none" stroke="#c9a87c" stroke-width="2" opacity="0.4"/>
+              <circle cx="30" cy="30" r="7" fill="#c9a87c" opacity="0.55"/>
+              <path d="M22 22 Q30 15 38 22 M22 38 Q30 45 38 38" stroke="#c9a87c" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.4"/>
+            </svg>
+          </div>
+          <p class="drip-card-name">白玉点滴（グルタチオン）</p>
+          <p class="drip-card-desc">
+            「白玉点滴」の愛称で知られるグルタチオンを主成分とした点滴。メラニン生成を抑制し、肌を内側からトーンアップ。くすみを改善し、白く透明感のある肌へと導きます。肝機能改善効果も報告されています。
+          </p>
+          <div class="drip-card-tags">
+            <span class="drip-card-tag">美白・透明感</span>
+            <span class="drip-card-tag">くすみ改善</span>
+            <span class="drip-card-tag">肝機能サポート</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 特徴 ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FEATURES</p>
+        <h2 class="section-title">美容点滴の特徴</h2>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <path d="M20 36 L24 32 L28 36 L32 28 L36 34" stroke="#c9a87c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="36" cy="20" r="5" fill="#c9a87c" opacity="0.5"/>
+              <path d="M36 17 L36 23 M33 20 L39 20" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">高い吸収率</p>
+          <p class="feature-card-desc">点滴は経口摂取と異なり直接血管へ投与するため、ほぼ100%の吸収率で美容成分が全身に行き渡ります。</p>
+        </div>
+        <div class="feature-card reveal reveal--delay">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <path d="M18 28 L24 34 L38 20" stroke="#c9a87c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">ダウンタイムなし</p>
+          <p class="feature-card-desc">施術時間は30〜60分程度。終了後はすぐに日常生活・お仕事に戻っていただけます。外見上の変化もありません。</p>
+        </div>
+        <div class="feature-card reveal reveal--delay2">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <path d="M22 34 Q28 20 34 34" stroke="#c9a87c" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M25 30 Q28 24 31 30" stroke="#c9a87c" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <circle cx="28" cy="38" r="2.5" fill="#c9a87c" opacity="0.6"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">組み合わせ自由</p>
+          <p class="feature-card-desc">高濃度ビタミンCと白玉点滴の組み合わせや、他の美容施術と組み合わせることでさらなる相乗効果が期待できます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== こんなお悩みに ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">TROUBLE</p>
+        <h2 class="section-title">こんなお悩みの方に</h2>
+      </div>
+      <div class="worry-grid reveal">
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          肌のくすみが気になり、透明感のある肌になりたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          シミ・色素沈着を内側からケアしたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          疲れが取れず、肌のハリ・活力が低下している
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          免疫力を高め、体の内側から美しく健康でいたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          ダウンタイムのない施術で仕事を休まず美容ケアしたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          レーザー施術と組み合わせて相乗効果を高めたい
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 施術の流れ ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FLOW</p>
+        <h2 class="section-title">施術の流れ</h2>
+      </div>
+      <div class="flow-list">
+        <div class="flow-item reveal">
+          <div class="flow-num">1</div>
+          <div class="flow-body">
+            <p class="flow-title">カウンセリング・問診</p>
+            <p class="flow-desc">お悩み・ご希望・体調・アレルギー・服薬状況などを確認します。高濃度ビタミンCと白玉点滴の違いや適した施術をご提案します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay">
+          <div class="flow-num">2</div>
+          <div class="flow-body">
+            <p class="flow-title">医師による診察・処方</p>
+            <p class="flow-desc">医師が状態を確認し、点滴の種類・濃度・容量を決定します。G6PD検査（高濃度ビタミンC初回のみ）も行います。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay2">
+          <div class="flow-num">3</div>
+          <div class="flow-body">
+            <p class="flow-title">点滴施術（約30〜60分）</p>
+            <p class="flow-desc">リクライニングチェアでリラックスしながら点滴を受けていただきます。施術中は読書やスマートフォンの使用も可能です。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay3">
+          <div class="flow-num">4</div>
+          <div class="flow-body">
+            <p class="flow-title">終了後の確認・会計</p>
+            <p class="flow-desc">点滴終了後は少し休んでいただき、体調に問題がないことを確認してからお帰りいただけます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 料金表 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">PRICE</p>
+        <h2 class="section-title">料金表</h2>
+      </div>
+      <div class="reveal" style="overflow-x:auto;">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>施術メニュー</th>
+              <th>料金（税込）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2" style="background:var(--color-bg-warm); font-weight:500; font-size:0.82rem; letter-spacing:0.04em; color:var(--color-accent-dk);">高濃度ビタミンC点滴</td>
+            </tr>
+            <tr>
+              <td>高濃度ビタミンC点滴 12.5g</td>
+              <td>11,000円〜</td>
+            </tr>
+            <tr>
+              <td>高濃度ビタミンC点滴 25g</td>
+              <td>16,500円〜</td>
+            </tr>
+            <tr>
+              <td>高濃度ビタミンC点滴 50g（超高濃度）</td>
+              <td>27,500円〜</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="background:var(--color-bg-warm); font-weight:500; font-size:0.82rem; letter-spacing:0.04em; color:var(--color-accent-dk);">白玉点滴（グルタチオン）</td>
+            </tr>
+            <tr>
+              <td>白玉点滴 600mg</td>
+              <td>16,500円〜</td>
+            </tr>
+            <tr>
+              <td>白玉点滴 1200mg</td>
+              <td>22,000円〜</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="background:var(--color-bg-warm); font-weight:500; font-size:0.82rem; letter-spacing:0.04em; color:var(--color-accent-dk);">セットプラン</td>
+            </tr>
+            <tr>
+              <td>ビタミンC 25g ＋ 白玉点滴 600mg</td>
+              <td>27,500円〜</td>
+            </tr>
+            <tr>
+              <td>初診カウンセリング</td>
+              <td>無料</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">※ 料金はすべて税込価格です。初回の高濃度ビタミンC点滴にはG6PD検査費用が別途かかる場合があります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== よくある質問 ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title">よくある質問</h2>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">高濃度ビタミンC点滴と白玉点滴はどちらが向いていますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              高濃度ビタミンC点滴は、シミ予防・コラーゲン生成・免疫力向上を主な目的とした方に適しています。白玉点滴（グルタチオン）は、肌のトーンアップ・くすみ改善・透明感アップを重視したい方に向いています。どちらも組み合わせることでより高い効果が期待できます。カウンセリングで医師がご状況に合わせてご提案します。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">どのくらいの頻度で通えばいいですか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              初めのうちは週1〜2回を目安に通っていただくと効果を実感しやすいです。効果が安定してきたら2〜4週間に1回のメンテナンスとして継続いただく方が多いです。ライフスタイルに合わせてご相談ください。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">施術後すぐに仕事に戻れますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              はい、施術後は特別な制限はありませんので、すぐにお仕事や日常生活に戻っていただけます。ただし施術当日は激しい運動・飲酒・サウナは控えていただくようお願いしています。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">G6PD検査とは何ですか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              G6PD（グルコース6リン酸脱水素酵素）欠損症という遺伝性の疾患がある場合、高濃度ビタミンC点滴を投与すると溶血（赤血球が壊れる）を起こす危険があります。そのため、初回の高濃度ビタミンC点滴前に血液検査でG6PD欠損症でないことを確認する必要があります。一度検査すれば次回以降は不要です。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 予約CTA ===== -->
+  <section class="cta-section">
+    <div class="container">
+      <p class="section-label">RESERVATION</p>
+      <h2 class="section-title">ご予約・お問い合わせ</h2>
+      <p class="section-desc">初診カウンセリングは無料です。どんな些細なお悩みもお気軽にご相談ください。</p>
+      <div class="cta-btns">
+        <a href="tel:03-1234-5678" class="btn btn--phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="currentColor"/></svg>
+          お電話でのご予約
+        </a>
+        <a href="#" class="btn btn--reserve">オンラインでご予約</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-main">NATURE Beauty Clinic</span>
+          <span class="logo-sub">美容皮膚科</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html">TOP</a>
+          <a href="index.html#menu">施術メニュー</a>
+          <a href="index.html#access">アクセス</a>
+        </nav>
+      </div>
+      <p class="footer-copy">&copy; 2026 ナチュレ美容皮膚科クリニック. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== ヘッダー：スクロール時クラス付与 ===== */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    /* ===== ハンバーガーメニュー ===== */
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('is-open');
+      nav.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    });
+    nav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-open');
+        nav.classList.remove('is-open');
+      });
+    });
+
+    /* ===== スクロールアニメーション ===== */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ===== FAQ アコーディオン ===== */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+    });
+  </script>
+</body>
+</html>

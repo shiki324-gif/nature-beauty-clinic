@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>医療脱毛 | ナチュレ美容皮膚科クリニック</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== パンくずリスト ===== */
+    .breadcrumb {
+      background: var(--color-bg-alt);
+      padding: 0.75rem 0;
+      margin-top: 64px;
+    }
+    .breadcrumb-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--color-text-lt);
+    }
+    .breadcrumb-list li { display: flex; align-items: center; gap: 0.25rem; }
+    .breadcrumb-list a { color: var(--color-accent); transition: color var(--transition); }
+    .breadcrumb-list a:hover { color: var(--color-accent-dk); }
+    .breadcrumb-list .sep { color: var(--color-border); }
+
+    /* ===== ヒーローセクション ===== */
+    .detail-hero {
+      position: relative;
+      height: clamp(320px, 50vw, 520px);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .detail-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .detail-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(40,50,60,0.20) 0%,
+        rgba(40,50,60,0.55) 100%
+      );
+    }
+    .detail-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--color-white);
+      padding: 0 var(--sp-sm);
+    }
+    .detail-hero-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      background: rgba(201,168,124,0.75);
+      color: #fff;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .detail-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.28);
+      margin-bottom: 0.75rem;
+    }
+    .detail-hero-catch {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      opacity: 0.92;
+    }
+
+    /* ===== 共通コンテンツ ===== */
+    .detail-section {
+      padding: var(--sp-lg) 0;
+    }
+    .detail-section + .detail-section {
+      border-top: 1px solid var(--color-border);
+    }
+    .detail-section--alt  { background: var(--color-bg-alt); }
+    .detail-section--warm { background: var(--color-bg-warm); }
+
+    .detail-section-head {
+      margin-bottom: 2.5rem;
+    }
+    .detail-section-head .section-label { margin-bottom: 0.4rem; }
+    .detail-section-head .section-title { margin-bottom: 0.6rem; }
+
+    .overview-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-text);
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ===== 特徴カード ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 600px) {
+      .feature-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .feature-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-card-icon { width: 56px; height: 56px; margin: 0 auto 1rem; }
+    .feature-card-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    .feature-card-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-lt);
+      line-height: 1.75;
+    }
+
+    /* ===== お悩み ===== */
+    .worry-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      max-width: 720px;
+    }
+    @media (min-width: 600px) {
+      .worry-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .worry-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--color-white);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid var(--color-border);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--color-text);
+    }
+    .worry-check {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .worry-check svg { width: 11px; height: 11px; }
+
+    /* ===== 対応部位 ===== */
+    .body-parts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      max-width: 600px;
+    }
+    @media (min-width: 600px) {
+      .body-parts-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .body-part-badge {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 0.65rem 1rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text);
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .body-part-badge:hover {
+      background: var(--color-bg-warm);
+      border-color: var(--color-accent);
+    }
+
+    /* ===== 施術の流れ ===== */
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      max-width: 680px;
+    }
+    .flow-item {
+      display: flex;
+      gap: 1.25rem;
+      position: relative;
+    }
+    .flow-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 48px;
+      width: 2px;
+      height: calc(100% - 12px);
+      background: var(--color-border);
+    }
+    .flow-num {
+      flex-shrink: 0;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(201,168,124,0.35);
+      position: relative;
+      z-index: 1;
+    }
+    .flow-body { padding: 0.2rem 0 2rem; }
+    .flow-item:last-child .flow-body { padding-bottom: 0; }
+    .flow-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.35rem;
+    }
+    .flow-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-lt);
+      line-height: 1.75;
+    }
+
+    /* ===== 料金表 ===== */
+    .price-table {
+      width: 100%;
+      max-width: 680px;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .price-table th, .price-table td {
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .price-table thead th {
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+    .price-table thead th:first-child { border-radius: 8px 0 0 0; }
+    .price-table thead th:last-child  { border-radius: 0 8px 0 0; }
+    .price-table tbody tr:last-child td { border-bottom: none; }
+    .price-table tbody tr:nth-child(even) td { background: var(--color-bg-alt); }
+    .price-note {
+      font-size: 0.78rem;
+      color: var(--color-text-lt);
+      margin-top: 0.75rem;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-list {
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-white);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: background var(--transition);
+    }
+    .faq-question:hover { background: var(--color-bg-alt); }
+    .faq-q-badge {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .faq-q-text { flex: 1; }
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      transition: transform var(--transition);
+    }
+    .faq-item.is-open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-item.is-open .faq-answer { max-height: 400px; }
+    .faq-answer-inner {
+      padding: 0 1.25rem 1.1rem 3.5rem;
+      font-size: 0.86rem;
+      color: var(--color-text-lt);
+      line-height: 1.85;
+    }
+
+    /* ===== 予約CTA ===== */
+    .cta-section {
+      background: var(--color-bg-warm);
+      padding: var(--sp-lg) 0;
+      text-align: center;
+    }
+    .cta-section .section-title { margin-bottom: 0.5rem; }
+    .cta-section .section-desc { margin: 0 auto 2rem; }
+    .cta-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn--phone {
+      background: var(--color-white);
+      color: var(--color-accent-dk);
+      border-color: var(--color-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn--phone:hover {
+      background: var(--color-accent);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+    .btn--reserve {
+      background: var(--color-accent);
+      color: var(--color-white);
+      border-color: var(--color-accent);
+    }
+    .btn--reserve:hover {
+      background: var(--color-accent-dk);
+      border-color: var(--color-accent-dk);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-main">NATURE Beauty Clinic</span>
+        <span class="logo-sub">美容皮膚科</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">TOP</a></li>
+          <li><a href="index.html#menu" class="nav-link">施術メニュー</a></li>
+          <li><a href="index.html#access" class="nav-link">アクセス</a></li>
+          <li><a href="#" class="nav-link nav-cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== パンくずリスト ===== -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <div class="container">
+      <ol class="breadcrumb-list">
+        <li><a href="index.html">TOP</a></li>
+        <li><span class="sep">›</span></li>
+        <li><a href="index.html#menu">施術メニュー</a></li>
+        <li><span class="sep">›</span></li>
+        <li>医療脱毛</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ===== ヒーローセクション ===== -->
+  <section class="detail-hero">
+    <img
+      class="detail-hero-img"
+      src="https://images.pexels.com/photos/3985354/pexels-photo-3985354.jpeg?w=1200&q=80"
+      alt="医療脱毛の施術イメージ"
+    />
+    <div class="detail-hero-overlay"></div>
+    <div class="detail-hero-content">
+      <span class="detail-hero-label">HAIR REMOVAL</span>
+      <h1 class="detail-hero-title">医療脱毛</h1>
+      <p class="detail-hero-catch">医療レーザーで、なめらかな素肌を永続的に。</p>
+    </div>
+  </section>
+
+  <!-- ===== 施術概要 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">OVERVIEW</p>
+        <h2 class="section-title">施術概要</h2>
+      </div>
+      <p class="overview-text reveal">
+        医療脱毛は、医療用レーザーを毛根部分のメラニン色素に照射し、毛包を破壊することで永続的な脱毛効果を得る施術です。エステ脱毛と異なり、医師または看護師が施術を行うため、出力の高い医療レーザーを使用できます。全身・顔・VIOなど幅広い部位に対応しており、肌質・毛質に合わせた最適なレーザーを選択します。
+      </p>
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <path d="M20 36 Q24 20 28 16 Q32 20 36 36" stroke="#c9a87c" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M23 30 Q28 24 33 30" stroke="#c9a87c" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+              <line x1="28" y1="36" x2="28" y2="40" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">高い永久脱毛効果</p>
+          <p class="feature-card-desc">医療用高出力レーザーが毛根を直接破壊。エステ脱毛に比べ、少ない回数で永続的な効果を実感できます。</p>
+        </div>
+        <div class="feature-card reveal reveal--delay">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <path d="M18 28 L24 34 L38 20" stroke="#c9a87c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">安全・安心の医療管理</p>
+          <p class="feature-card-desc">医師・看護師が施術を担当。万が一のトラブルにも迅速に対応できる医療環境で施術します。</p>
+        </div>
+        <div class="feature-card reveal reveal--delay2">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <circle cx="28" cy="26" r="7" fill="none" stroke="#c9a87c" stroke-width="2"/>
+              <path d="M22 38 Q28 34 34 38" stroke="#c9a87c" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M28 18 Q32 22 32 26 Q32 30 28 32 Q24 30 24 26 Q24 22 28 18Z" fill="#c9a87c" opacity="0.25"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">全身・VIO対応</p>
+          <p class="feature-card-desc">顔・全身・デリケートゾーン（VIO）まで幅広く対応。まとめてケアできるコースもご用意しています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== こんなお悩みに ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">TROUBLE</p>
+        <h2 class="section-title">こんなお悩みの方に</h2>
+      </div>
+      <div class="worry-grid reveal">
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          毎日のムダ毛処理が面倒で時間を取られる
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          カミソリ・除毛クリームで肌荒れが気になる
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          脱毛サロンで思うような効果を得られなかった
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          全身をすっきりさせてスポーツや水着を楽しみたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          VIOも含めて清潔感を保ちたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          肌が敏感で安心できるクリニックで施術したい
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 対応部位 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">BODY PARTS</p>
+        <h2 class="section-title">対応部位</h2>
+      </div>
+      <div class="body-parts-grid reveal">
+        <div class="body-part-badge">顔（産毛）</div>
+        <div class="body-part-badge">ワキ</div>
+        <div class="body-part-badge">腕・手</div>
+        <div class="body-part-badge">脚・足</div>
+        <div class="body-part-badge">背中・腰</div>
+        <div class="body-part-badge">お腹</div>
+        <div class="body-part-badge">胸</div>
+        <div class="body-part-badge">VIO</div>
+        <div class="body-part-badge">全身セット</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 施術の流れ ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FLOW</p>
+        <h2 class="section-title">施術の流れ</h2>
+      </div>
+      <div class="flow-list">
+        <div class="flow-item reveal">
+          <div class="flow-num">1</div>
+          <div class="flow-body">
+            <p class="flow-title">無料カウンセリング</p>
+            <p class="flow-desc">お肌の状態・毛質・ご希望の部位をカウンセリングします。施術の回数目安・料金・注意事項について丁寧にご説明します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay">
+          <div class="flow-num">2</div>
+          <div class="flow-body">
+            <p class="flow-title">医師による診察</p>
+            <p class="flow-desc">肌の状態を確認し、施術に適したレーザーの種類・出力を決定します。アレルギーや服薬中の薬なども確認します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay2">
+          <div class="flow-num">3</div>
+          <div class="flow-body">
+            <p class="flow-title">施術部位の剃毛</p>
+            <p class="flow-desc">施術当日はご自身で剃毛してお越しいただきます。剃り残しがある場合は、クリニックで対応することも可能です。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay3">
+          <div class="flow-num">4</div>
+          <div class="flow-body">
+            <p class="flow-title">レーザー照射</p>
+            <p class="flow-desc">冷却機能付きレーザー機器で施術します。照射時はゴムで弾かれるような軽い刺激を感じますが、痛みを最小限に抑えます。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-num">5</div>
+          <div class="flow-body">
+            <p class="flow-title">アフターケア・次回予約</p>
+            <p class="flow-desc">施術後の肌を保湿ケアします。次回予約の目安（4〜8週間後）を確認して終了です。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 料金表 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">PRICE</p>
+        <h2 class="section-title">料金表</h2>
+      </div>
+      <div class="reveal" style="overflow-x:auto;">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>施術プラン・部位</th>
+              <th>料金（税込）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="2" style="background:var(--color-bg-warm); font-weight:500; font-size:0.82rem; letter-spacing:0.04em; color:var(--color-accent-dk);">全身コース</td>
+            </tr>
+            <tr>
+              <td>全身（VIO含む）5回コース</td>
+              <td>カウンセリングにてご案内</td>
+            </tr>
+            <tr>
+              <td>全身（VIOなし）5回コース</td>
+              <td>カウンセリングにてご案内</td>
+            </tr>
+            <tr>
+              <td colspan="2" style="background:var(--color-bg-warm); font-weight:500; font-size:0.82rem; letter-spacing:0.04em; color:var(--color-accent-dk);">部位別（1回）</td>
+            </tr>
+            <tr>
+              <td>ワキ</td>
+              <td>カウンセリングにてご案内</td>
+            </tr>
+            <tr>
+              <td>VIO</td>
+              <td>カウンセリングにてご案内</td>
+            </tr>
+            <tr>
+              <td>顔（産毛）</td>
+              <td>カウンセリングにてご案内</td>
+            </tr>
+            <tr>
+              <td>初診カウンセリング</td>
+              <td>無料</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">※ 料金は部位・毛量・肌質により異なります。詳しくは無料カウンセリング時にご案内します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== よくある質問 ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title">よくある質問</h2>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">エステ脱毛と医療脱毛の違いは何ですか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              医療脱毛は医療用高出力レーザーを使用し、医師・看護師が施術します。毛根を直接破壊するため永続的な効果が期待できます。エステ脱毛は光（IPL）を使用し施術者が行いますが、出力が制限されているため永久脱毛は認められていません。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">何回くらいで効果が出ますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              部位・毛質・肌質によって異なりますが、平均5〜8回を目安にしていただいています。毛には生育サイクル（成長期・退行期・休止期）があり、成長期の毛にしか効果がないため、複数回に分けて照射する必要があります。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">施術後のダウンタイムはありますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              施術後に軽い赤みやほてりが生じることがありますが、通常数時間〜1日程度で落ち着きます。施術当日は激しい運動・サウナ・飲酒を避けていただくようお願いしています。日常生活への支障はほとんどありません。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">日焼けしている肌でも施術できますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              日焼けした肌や色黒の肌は、レーザーの熱が肌のメラニンにも反応しやすく、火傷・色素沈着のリスクが高まります。施術前4週間は日焼けを避けていただき、セルフタンニング製品もお控えください。診察時に肌の状態を確認のうえ、施術可否を判断します。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 予約CTA ===== -->
+  <section class="cta-section">
+    <div class="container">
+      <p class="section-label">RESERVATION</p>
+      <h2 class="section-title">ご予約・お問い合わせ</h2>
+      <p class="section-desc">無料カウンセリングを随時受け付けております。お気軽にご連絡ください。</p>
+      <div class="cta-btns">
+        <a href="tel:03-1234-5678" class="btn btn--phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="currentColor"/></svg>
+          お電話でのご予約
+        </a>
+        <a href="#" class="btn btn--reserve">オンラインでご予約</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-main">NATURE Beauty Clinic</span>
+          <span class="logo-sub">美容皮膚科</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html">TOP</a>
+          <a href="index.html#menu">施術メニュー</a>
+          <a href="index.html#access">アクセス</a>
+        </nav>
+      </div>
+      <p class="footer-copy">&copy; 2026 ナチュレ美容皮膚科クリニック. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== ヘッダー：スクロール時クラス付与 ===== */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    /* ===== ハンバーガーメニュー ===== */
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('is-open');
+      nav.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    });
+    nav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-open');
+        nav.classList.remove('is-open');
+      });
+    });
+
+    /* ===== スクロールアニメーション ===== */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ===== FAQ アコーディオン ===== */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+    });
+  </script>
+</body>
+</html>

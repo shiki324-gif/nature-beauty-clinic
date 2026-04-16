@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>レーザートーニング | ナチュレ美容皮膚科クリニック</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== パンくずリスト ===== */
+    .breadcrumb {
+      background: var(--color-bg-alt);
+      padding: 0.75rem 0;
+      margin-top: 64px;
+    }
+    .breadcrumb-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--color-text-lt);
+    }
+    .breadcrumb-list li { display: flex; align-items: center; gap: 0.25rem; }
+    .breadcrumb-list a { color: var(--color-accent); transition: color var(--transition); }
+    .breadcrumb-list a:hover { color: var(--color-accent-dk); }
+    .breadcrumb-list .sep { color: var(--color-border); }
+
+    /* ===== ヒーローセクション ===== */
+    .detail-hero {
+      position: relative;
+      height: clamp(320px, 50vw, 520px);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .detail-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .detail-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(50,30,60,0.18) 0%,
+        rgba(50,30,60,0.55) 100%
+      );
+    }
+    .detail-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--color-white);
+      padding: 0 var(--sp-sm);
+    }
+    .detail-hero-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      background: rgba(201,168,124,0.75);
+      color: #fff;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .detail-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.28);
+      margin-bottom: 0.75rem;
+    }
+    .detail-hero-catch {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      opacity: 0.92;
+    }
+
+    /* ===== 共通コンテンツ ===== */
+    .detail-section {
+      padding: var(--sp-lg) 0;
+    }
+    .detail-section + .detail-section {
+      border-top: 1px solid var(--color-border);
+    }
+    .detail-section--alt  { background: var(--color-bg-alt); }
+    .detail-section--warm { background: var(--color-bg-warm); }
+
+    .detail-section-head {
+      margin-bottom: 2.5rem;
+    }
+    .detail-section-head .section-label { margin-bottom: 0.4rem; }
+    .detail-section-head .section-title { margin-bottom: 0.6rem; }
+
+    .overview-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-text);
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* ===== 特徴カード ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 600px) {
+      .feature-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .feature-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-card-icon { width: 56px; height: 56px; margin: 0 auto 1rem; }
+    .feature-card-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    .feature-card-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-lt);
+      line-height: 1.75;
+    }
+
+    /* ===== お悩み ===== */
+    .worry-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      max-width: 720px;
+    }
+    @media (min-width: 600px) {
+      .worry-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .worry-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--color-white);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid var(--color-border);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--color-text);
+    }
+    .worry-check {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .worry-check svg { width: 11px; height: 11px; }
+
+    /* ===== 効果イメージ ===== */
+    .effect-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: 680px;
+    }
+    @media (min-width: 600px) {
+      .effect-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .effect-badge {
+      background: var(--color-white);
+      border: 1.5px solid var(--color-accent);
+      border-radius: 12px;
+      padding: 1rem 0.75rem;
+      text-align: center;
+    }
+    .effect-badge-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.4rem;
+      line-height: 1;
+    }
+    .effect-badge-text {
+      font-size: 0.8rem;
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    /* ===== 施術の流れ ===== */
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      max-width: 680px;
+    }
+    .flow-item {
+      display: flex;
+      gap: 1.25rem;
+      position: relative;
+    }
+    .flow-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 48px;
+      width: 2px;
+      height: calc(100% - 12px);
+      background: var(--color-border);
+    }
+    .flow-num {
+      flex-shrink: 0;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(201,168,124,0.35);
+      position: relative;
+      z-index: 1;
+    }
+    .flow-body { padding: 0.2rem 0 2rem; }
+    .flow-item:last-child .flow-body { padding-bottom: 0; }
+    .flow-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.35rem;
+    }
+    .flow-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-lt);
+      line-height: 1.75;
+    }
+
+    /* ===== 料金表 ===== */
+    .price-table {
+      width: 100%;
+      max-width: 680px;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .price-table th, .price-table td {
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .price-table thead th {
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+    .price-table thead th:first-child { border-radius: 8px 0 0 0; }
+    .price-table thead th:last-child  { border-radius: 0 8px 0 0; }
+    .price-table tbody tr:last-child td { border-bottom: none; }
+    .price-table tbody tr:nth-child(even) td { background: var(--color-bg-alt); }
+    .price-note {
+      font-size: 0.78rem;
+      color: var(--color-text-lt);
+      margin-top: 0.75rem;
+    }
+
+    /* ===== FAQ ===== */
+    .faq-list {
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-white);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: background var(--transition);
+    }
+    .faq-question:hover { background: var(--color-bg-alt); }
+    .faq-q-badge {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .faq-q-text { flex: 1; }
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      transition: transform var(--transition);
+    }
+    .faq-item.is-open .faq-chevron { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.is-open .faq-answer { max-height: 400px; }
+    .faq-answer-inner {
+      padding: 0 1.25rem 1.1rem 3.5rem;
+      font-size: 0.86rem;
+      color: var(--color-text-lt);
+      line-height: 1.85;
+    }
+
+    /* ===== 予約CTA ===== */
+    .cta-section {
+      background: var(--color-bg-warm);
+      padding: var(--sp-lg) 0;
+      text-align: center;
+    }
+    .cta-section .section-title { margin-bottom: 0.5rem; }
+    .cta-section .section-desc { margin: 0 auto 2rem; }
+    .cta-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn--phone {
+      background: var(--color-white);
+      color: var(--color-accent-dk);
+      border-color: var(--color-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn--phone:hover {
+      background: var(--color-accent);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+    .btn--reserve {
+      background: var(--color-accent);
+      color: var(--color-white);
+      border-color: var(--color-accent);
+    }
+    .btn--reserve:hover {
+      background: var(--color-accent-dk);
+      border-color: var(--color-accent-dk);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-main">NATURE Beauty Clinic</span>
+        <span class="logo-sub">美容皮膚科</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">TOP</a></li>
+          <li><a href="index.html#menu" class="nav-link">施術メニュー</a></li>
+          <li><a href="index.html#access" class="nav-link">アクセス</a></li>
+          <li><a href="#" class="nav-link nav-cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== パンくずリスト ===== -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <div class="container">
+      <ol class="breadcrumb-list">
+        <li><a href="index.html">TOP</a></li>
+        <li><span class="sep">›</span></li>
+        <li><a href="index.html#menu">施術メニュー</a></li>
+        <li><span class="sep">›</span></li>
+        <li>レーザートーニング</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ===== ヒーローセクション ===== -->
+  <section class="detail-hero">
+    <img
+      class="detail-hero-img"
+      src="laser-toning.png.png"
+      alt="レーザートーニングの施術イメージ"
+    />
+    <div class="detail-hero-overlay"></div>
+    <div class="detail-hero-content">
+      <span class="detail-hero-label">LASER TONING</span>
+      <h1 class="detail-hero-title">レーザートーニング</h1>
+      <p class="detail-hero-catch">シミ・くすみを根本から改善し、透明感のある素肌へ。</p>
+    </div>
+  </section>
+
+  <!-- ===== 施術概要 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">OVERVIEW</p>
+        <h2 class="section-title">施術概要</h2>
+      </div>
+      <p class="overview-text reveal">
+        レーザートーニングは、Qスイッチヤグレーザーを低出力で均一に照射し、メラニン色素を少しずつ分解・排出させることでシミ・そばかす・肝斑を改善する施術です。従来の高出力レーザーでは困難だった肝斑にも安全に対応でき、お肌全体のトーンアップと透明感の向上が期待できます。施術時間は約20〜30分と短く、ダウンタイムも少ないため、忙しい方にも最適な施術です。
+      </p>
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <circle cx="28" cy="28" r="11" fill="none" stroke="#c9a87c" stroke-width="1.8" opacity="0.5"/>
+              <path d="M28 17 L29.8 24.5 L37.5 25.5 L31.5 31 L33.5 38.5 L28 34.5 L22.5 38.5 L24.5 31 L18.5 25.5 L26.2 24.5 Z" fill="#c9a87c" opacity="0.7"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">肝斑にも対応</p>
+          <p class="feature-card-desc">低出力で均一に照射するレーザートーニングは、刺激に敏感な肝斑にも安全に対応できる唯一の施術法です。</p>
+        </div>
+        <div class="feature-card reveal reveal--delay">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <circle cx="28" cy="28" r="10" fill="#c9a87c" opacity="0.2"/>
+              <path d="M28 18 L28 38 M18 28 L38 28" stroke="#c9a87c" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+              <circle cx="28" cy="28" r="4" fill="#c9a87c" opacity="0.65"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">均一なトーンアップ</p>
+          <p class="feature-card-desc">顔全体に均一に照射することで、くすみを取り除きお肌全体の明るさと透明感を引き出します。</p>
+        </div>
+        <div class="feature-card reveal reveal--delay2">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <path d="M20 36 L24 32 L28 36 L32 28 L36 32" stroke="#c9a87c" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 28 L24 34 L38 20" stroke="#c9a87c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">ダウンタイムが少ない</p>
+          <p class="feature-card-desc">施術後の赤みもほとんどなく、施術当日からメイク可能。昼休みや仕事帰りにも気軽に通えます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== こんなお悩みに ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">TROUBLE</p>
+        <h2 class="section-title">こんなお悩みの方に</h2>
+      </div>
+      <div class="worry-grid reveal">
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          シミ・そばかすが目立ち、ファンデーションで隠している
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          肝斑（ほほの褐色のシミ）が年々濃くなっている
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          肌全体がくすんでいて顔色が悪く見える
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          日焼けによる色素沈着をケアしたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          透明感・つやのある明るい肌を目指したい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          ダウンタイムが少ない施術で通いやすいクリニックを探している
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 期待できる効果 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">EFFECT</p>
+        <h2 class="section-title">期待できる効果</h2>
+      </div>
+      <div class="effect-grid reveal">
+        <div class="effect-badge">
+          <div class="effect-badge-icon">✨</div>
+          <div class="effect-badge-text">シミ・そばかす改善</div>
+        </div>
+        <div class="effect-badge">
+          <div class="effect-badge-icon">🌟</div>
+          <div class="effect-badge-text">肝斑の薄化</div>
+        </div>
+        <div class="effect-badge">
+          <div class="effect-badge-icon">💎</div>
+          <div class="effect-badge-text">透明感・美白</div>
+        </div>
+        <div class="effect-badge">
+          <div class="effect-badge-icon">🌸</div>
+          <div class="effect-badge-text">毛穴・ハリ改善</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 施術の流れ ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FLOW</p>
+        <h2 class="section-title">施術の流れ</h2>
+      </div>
+      <div class="flow-list">
+        <div class="flow-item reveal">
+          <div class="flow-num">1</div>
+          <div class="flow-body">
+            <p class="flow-title">カウンセリング・診察</p>
+            <p class="flow-desc">お肌の状態・シミの種類・ご希望をお聞きします。肝斑・シミ・そばかすの種類を見極め、最適な照射プランをご提案します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay">
+          <div class="flow-num">2</div>
+          <div class="flow-body">
+            <p class="flow-title">洗顔・メイクオフ</p>
+            <p class="flow-desc">施術前に洗顔またはメイクオフをしていただきます。クレンジング用品はご用意しています。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay2">
+          <div class="flow-num">3</div>
+          <div class="flow-body">
+            <p class="flow-title">目元の保護・ジェル塗布</p>
+            <p class="flow-desc">アイプロテクターで目を保護し、施術部位にジェルを塗布します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay3">
+          <div class="flow-num">4</div>
+          <div class="flow-body">
+            <p class="flow-title">レーザー照射（約20〜30分）</p>
+            <p class="flow-desc">低出力のQスイッチヤグレーザーを顔全体に均一に照射します。施術中はゴムで弾かれるような軽い感覚があります。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-num">5</div>
+          <div class="flow-body">
+            <p class="flow-title">クーリング・保湿ケア</p>
+            <p class="flow-desc">施術後は冷却と保湿ケアを行います。メイクは当日から可能です。次回の施術は2〜4週間後を目安にご予約ください。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 料金表 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">PRICE</p>
+        <h2 class="section-title">料金表</h2>
+      </div>
+      <div class="reveal" style="overflow-x:auto;">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>施術メニュー</th>
+              <th>料金（税込）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>レーザートーニング 1回</td>
+              <td>16,500円〜</td>
+            </tr>
+            <tr>
+              <td>レーザートーニング 3回コース</td>
+              <td>44,000円〜</td>
+            </tr>
+            <tr>
+              <td>レーザートーニング 5回コース</td>
+              <td>71,500円〜</td>
+            </tr>
+            <tr>
+              <td>レーザートーニング 10回コース</td>
+              <td>132,000円〜</td>
+            </tr>
+            <tr>
+              <td>初診カウンセリング</td>
+              <td>無料</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">※ 料金はすべて税込価格です。照射範囲・部位・回数により異なる場合があります。詳しくはカウンセリング時にご案内します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== よくある質問 ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title">よくある質問</h2>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">何回くらい通えば効果が出ますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              個人差はありますが、3〜5回を目安に効果を実感される方が多いです。シミの種類や濃さによっても異なるため、カウンセリングで医師がお肌の状態を確認したうえで目安をお伝えします。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">施術後にメイクはできますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              施術当日からメイクが可能です。ただし施術直後は肌が敏感な状態ですので、肌への刺激が少ないコスメを使用し、やさしくメイクされることをおすすめします。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">肝斑にも効果がありますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              はい、レーザートーニングは肝斑への有効性が認められている数少ない施術のひとつです。高出力レーザーは肝斑を悪化させる恐れがありますが、低出力で均一に照射するレーザートーニングは安全に照射できます。複数回の施術で徐々に改善されます。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">施術の間隔はどのくらいですか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              2〜4週間に1回のペースを推奨しています。定期的に通うことで、メラニンを少しずつ分解・排出するサイクルを維持でき、より高い効果が期待できます。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 予約CTA ===== -->
+  <section class="cta-section">
+    <div class="container">
+      <p class="section-label">RESERVATION</p>
+      <h2 class="section-title">ご予約・お問い合わせ</h2>
+      <p class="section-desc">初診カウンセリングは無料です。まずはお気軽にご相談ください。</p>
+      <div class="cta-btns">
+        <a href="tel:03-1234-5678" class="btn btn--phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="currentColor"/></svg>
+          お電話でのご予約
+        </a>
+        <a href="#" class="btn btn--reserve">オンラインでご予約</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-main">NATURE Beauty Clinic</span>
+          <span class="logo-sub">美容皮膚科</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html">TOP</a>
+          <a href="index.html#menu">施術メニュー</a>
+          <a href="index.html#access">アクセス</a>
+        </nav>
+      </div>
+      <p class="footer-copy">&copy; 2026 ナチュレ美容皮膚科クリニック. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== ヘッダー：スクロール時クラス付与 ===== */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    /* ===== ハンバーガーメニュー ===== */
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('is-open');
+      nav.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    });
+    nav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-open');
+        nav.classList.remove('is-open');
+      });
+    });
+
+    /* ===== スクロールアニメーション ===== */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ===== FAQ アコーディオン ===== */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+    });
+  </script>
+</body>
+</html>

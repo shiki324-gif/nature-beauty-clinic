@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ヒアルロン酸注射・ボトックス注射 | ナチュレ美容皮膚科クリニック</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== 詳細ページ共通スタイル ===== */
+
+    /* パンくずリスト */
+    .breadcrumb {
+      background: var(--color-bg-alt);
+      padding: 0.75rem 0;
+      margin-top: 64px; /* ヘッダー分のオフセット */
+    }
+    .breadcrumb-list {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      font-size: 0.78rem;
+      color: var(--color-text-lt);
+    }
+    .breadcrumb-list li { display: flex; align-items: center; gap: 0.25rem; }
+    .breadcrumb-list a { color: var(--color-accent); transition: color var(--transition); }
+    .breadcrumb-list a:hover { color: var(--color-accent-dk); }
+    .breadcrumb-list .sep { color: var(--color-border); }
+
+    /* ヒーローセクション */
+    .detail-hero {
+      position: relative;
+      height: clamp(320px, 50vw, 520px);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .detail-hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .detail-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(60,40,20,0.22) 0%,
+        rgba(60,40,20,0.52) 100%
+      );
+    }
+    .detail-hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: var(--color-white);
+      padding: 0 var(--sp-sm);
+    }
+    .detail-hero-label {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      background: rgba(201,168,124,0.75);
+      color: #fff;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .detail-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.25);
+      margin-bottom: 0.75rem;
+    }
+    .detail-hero-catch {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      opacity: 0.92;
+    }
+
+    /* ===== コンテンツ共通 ===== */
+    .detail-section {
+      padding: var(--sp-lg) 0;
+    }
+    .detail-section + .detail-section {
+      border-top: 1px solid var(--color-border);
+    }
+    .detail-section--alt {
+      background: var(--color-bg-alt);
+    }
+    .detail-section--warm {
+      background: var(--color-bg-warm);
+    }
+
+    /* セクション見出し */
+    .detail-section-head {
+      margin-bottom: 2.5rem;
+    }
+    .detail-section-head .section-label {
+      margin-bottom: 0.4rem;
+    }
+    .detail-section-head .section-title {
+      margin-bottom: 0.6rem;
+    }
+
+    /* ===== 施術概要 ===== */
+    .overview-text {
+      font-size: 0.95rem;
+      line-height: 2;
+      color: var(--color-text);
+      max-width: 720px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* 特徴カード */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 600px) {
+      .feature-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .feature-card {
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+    .feature-card-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 1rem;
+    }
+    .feature-card-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+    .feature-card-desc {
+      font-size: 0.82rem;
+      color: var(--color-text-lt);
+      line-height: 1.75;
+    }
+
+    /* ===== お悩みセクション ===== */
+    .worry-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      max-width: 720px;
+    }
+    @media (min-width: 600px) {
+      .worry-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .worry-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--color-white);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      border: 1px solid var(--color-border);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--color-text);
+    }
+    .worry-check {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .worry-check svg {
+      width: 11px;
+      height: 11px;
+    }
+
+    /* ===== 施術の流れ ===== */
+    .flow-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      max-width: 680px;
+    }
+    .flow-item {
+      display: flex;
+      gap: 1.25rem;
+      position: relative;
+    }
+    .flow-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 48px;
+      width: 2px;
+      height: calc(100% - 12px);
+      background: var(--color-border);
+    }
+    .flow-num {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(201,168,124,0.35);
+      position: relative;
+      z-index: 1;
+    }
+    .flow-body {
+      padding: 0.2rem 0 2rem;
+    }
+    .flow-item:last-child .flow-body {
+      padding-bottom: 0;
+    }
+    .flow-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.35rem;
+    }
+    .flow-desc {
+      font-size: 0.85rem;
+      color: var(--color-text-lt);
+      line-height: 1.75;
+    }
+
+    /* ===== 料金表 ===== */
+    .price-table {
+      width: 100%;
+      max-width: 680px;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .price-table th,
+    .price-table td {
+      padding: 0.9rem 1.25rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .price-table thead th {
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+    }
+    .price-table thead th:first-child { border-radius: 8px 0 0 0; }
+    .price-table thead th:last-child  { border-radius: 0 8px 0 0; }
+    .price-table tbody tr:last-child td { border-bottom: none; }
+    .price-table tbody tr:nth-child(even) td {
+      background: var(--color-bg-alt);
+    }
+    .price-note {
+      font-size: 0.78rem;
+      color: var(--color-text-lt);
+      margin-top: 0.75rem;
+    }
+
+    /* ===== FAQ（アコーディオン） ===== */
+    .faq-list {
+      max-width: 720px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .faq-item {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-white);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      text-align: left;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-text);
+      transition: background var(--transition);
+    }
+    .faq-question:hover { background: var(--color-bg-alt); }
+    .faq-q-badge {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .faq-q-text { flex: 1; }
+    .faq-chevron {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      transition: transform var(--transition);
+    }
+    .faq-item.is-open .faq-chevron {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+    }
+    .faq-item.is-open .faq-answer {
+      max-height: 400px;
+    }
+    .faq-answer-inner {
+      padding: 0 1.25rem 1.1rem 3.5rem;
+      font-size: 0.86rem;
+      color: var(--color-text-lt);
+      line-height: 1.85;
+    }
+
+    /* ===== 予約CTA ===== */
+    .cta-section {
+      background: var(--color-bg-warm);
+      padding: var(--sp-lg) 0;
+      text-align: center;
+    }
+    .cta-section .section-title {
+      margin-bottom: 0.5rem;
+    }
+    .cta-section .section-desc {
+      margin: 0 auto 2rem;
+    }
+    .cta-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .btn--phone {
+      background: var(--color-white);
+      color: var(--color-accent-dk);
+      border-color: var(--color-accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn--phone:hover {
+      background: var(--color-accent);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+    .btn--reserve {
+      background: var(--color-accent);
+      color: var(--color-white);
+      border-color: var(--color-accent);
+    }
+    .btn--reserve:hover {
+      background: var(--color-accent-dk);
+      border-color: var(--color-accent-dk);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-main">NATURE Beauty Clinic</span>
+        <span class="logo-sub">美容皮膚科</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">TOP</a></li>
+          <li><a href="index.html#menu" class="nav-link">施術メニュー</a></li>
+          <li><a href="index.html#access" class="nav-link">アクセス</a></li>
+          <li><a href="#" class="nav-link nav-cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== パンくずリスト ===== -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <div class="container">
+      <ol class="breadcrumb-list">
+        <li><a href="index.html">TOP</a></li>
+        <li><span class="sep">›</span></li>
+        <li><a href="index.html#menu">施術メニュー</a></li>
+        <li><span class="sep">›</span></li>
+        <li>ヒアルロン酸注射・ボトックス注射</li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- ===== ヒーローセクション ===== -->
+  <section class="detail-hero">
+    <img
+      class="detail-hero-img"
+      src="injection-treatment.png.png"
+      alt="ヒアルロン酸注射・ボトックス注射の施術イメージ"
+    />
+    <div class="detail-hero-overlay"></div>
+    <div class="detail-hero-content">
+      <span class="detail-hero-label">INJECTION</span>
+      <h1 class="detail-hero-title">ヒアルロン酸注射・<br />ボトックス注射</h1>
+      <p class="detail-hero-catch">自然な若返りを、最小限のダウンタイムで。</p>
+    </div>
+  </section>
+
+  <!-- ===== 施術概要 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">OVERVIEW</p>
+        <h2 class="section-title">施術概要</h2>
+      </div>
+      <p class="overview-text reveal">
+        ヒアルロン酸注射は、肌に本来存在するヒアルロン酸を注入し、ほうれい線・涙袋・唇・頬などにふっくらとしたボリュームをプラスします。ボトックス注射は、筋肉の動きを緩やかにするボツリヌストキシンを注入し、額・眉間・目尻のシワや、エラ張り・小顔、多汗症の改善に効果的です。どちらも短時間で施術が完了し、メスを使わないため、ダウンタイムが少なく自然な仕上がりが得られます。
+      </p>
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <path d="M20 36 C20 30 24 24 28 20 C32 24 36 30 36 36" stroke="#c9a87c" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <circle cx="28" cy="36" r="4" fill="#c9a87c" opacity="0.6"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">即効性が高い</p>
+          <p class="feature-card-desc">施術直後からボリュームアップ・シワ改善効果を実感。特別な日の前にも安心して受けられます。</p>
+        </div>
+        <div class="feature-card reveal reveal--delay">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <path d="M18 28 L24 34 L38 20" stroke="#c9a87c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">ダウンタイムが少ない</p>
+          <p class="feature-card-desc">メスを使わない注射施術のため回復が早く、施術当日や翌日から日常生活を送っていただけます。</p>
+        </div>
+        <div class="feature-card reveal reveal--delay2">
+          <div class="feature-card-icon">
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="28" cy="28" r="28" fill="#f5e6d3"/>
+              <circle cx="28" cy="28" r="10" fill="none" stroke="#c9a87c" stroke-width="2"/>
+              <path d="M28 18 L28 22 M28 34 L28 38 M18 28 L22 28 M34 28 L38 28" stroke="#c9a87c" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <p class="feature-card-title">自然な仕上がり</p>
+          <p class="feature-card-desc">医師が一人ひとりの顔立ちに合わせて注入量・部位を調整。整形感なく自然に若返った印象に仕上げます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== こんなお悩みに ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">TROUBLE</p>
+        <h2 class="section-title">こんなお悩みの方に</h2>
+      </div>
+      <div class="worry-grid reveal">
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          ほうれい線・マリオネットラインが気になる
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          額・眉間・目尻のシワを目立たなくしたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          涙袋をふっくらさせてかわいらしい目元にしたい
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          エラが張っていて顔が大きく見える
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          頬・こめかみのボリュームが減って老けて見える
+        </div>
+        <div class="worry-item">
+          <span class="worry-check">
+            <svg viewBox="0 0 11 11" fill="none"><path d="M2 5.5L4.5 8L9 3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          ダウンタイムをできるだけ少なくしたい
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 施術の流れ ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FLOW</p>
+        <h2 class="section-title">施術の流れ</h2>
+      </div>
+      <div class="flow-list">
+        <div class="flow-item reveal">
+          <div class="flow-num">1</div>
+          <div class="flow-body">
+            <p class="flow-title">カウンセリング・診察</p>
+            <p class="flow-desc">お悩みや希望の仕上がりをお聞きし、医師が肌の状態を診察します。施術内容・リスク・アフターケアについて丁寧にご説明します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay">
+          <div class="flow-num">2</div>
+          <div class="flow-body">
+            <p class="flow-title">デザイン・マーキング</p>
+            <p class="flow-desc">鏡でご確認いただきながら、注入部位・量をデザインします。ご要望をしっかり反映したプランをご提案します。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay2">
+          <div class="flow-num">3</div>
+          <div class="flow-body">
+            <p class="flow-title">麻酔クリーム塗布</p>
+            <p class="flow-desc">施術部位に麻酔クリームを塗布します（約20〜30分）。痛みに敏感な方も安心して施術を受けていただけます。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal reveal--delay3">
+          <div class="flow-num">4</div>
+          <div class="flow-body">
+            <p class="flow-title">注射施術</p>
+            <p class="flow-desc">マーキングに沿って注入を行います。施術時間は部位にもよりますが、通常10〜30分程度です。</p>
+          </div>
+        </div>
+        <div class="flow-item reveal">
+          <div class="flow-num">5</div>
+          <div class="flow-body">
+            <p class="flow-title">アフターケア・会計</p>
+            <p class="flow-desc">施術後の注意事項をご説明します。気になる点はいつでもご相談いただけます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 料金表 ===== -->
+  <section class="detail-section detail-section--alt">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">PRICE</p>
+        <h2 class="section-title">料金表</h2>
+      </div>
+      <div class="reveal" style="overflow-x:auto;">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>施術メニュー</th>
+              <th>料金（税込）</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ヒアルロン酸注射（1部位）</td>
+              <td>33,000円〜</td>
+            </tr>
+            <tr>
+              <td>ヒアルロン酸注射（2部位）</td>
+              <td>55,000円〜</td>
+            </tr>
+            <tr>
+              <td>ボトックス注射（1部位）</td>
+              <td>22,000円〜</td>
+            </tr>
+            <tr>
+              <td>ボトックス注射（2部位）</td>
+              <td>38,500円〜</td>
+            </tr>
+            <tr>
+              <td>エラボトックス（小顔）</td>
+              <td>44,000円〜</td>
+            </tr>
+            <tr>
+              <td>初診カウンセリング</td>
+              <td>無料</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="price-note">※ 料金はすべて税込価格です。部位・使用量により異なります。詳しくはカウンセリング時にご案内します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== よくある質問 ===== -->
+  <section class="detail-section">
+    <div class="container">
+      <div class="detail-section-head reveal">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title">よくある質問</h2>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">ダウンタイムはどのくらいかかりますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              ヒアルロン酸注射・ボトックス注射ともにダウンタイムは比較的少ない施術です。注射後に一時的な赤み・腫れ・内出血が生じることがありますが、多くの場合数日〜1週間程度で落ち着きます。メイクは翌日から可能です。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">効果はどのくらい続きますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              ヒアルロン酸注射の効果持続期間は種類・部位によって異なりますが、目安として6ヶ月〜2年程度です。ボトックス注射は4〜6ヶ月程度が目安です。個人差がありますので、詳しくはカウンセリング時にご確認ください。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">痛みはありますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              麻酔クリームを使用するため、痛みを大幅に軽減した状態で施術を受けていただけます。個人差はありますが、チクッとする程度と感じる方がほとんどです。痛みへの不安がある方はお気軽にご相談ください。
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            <span class="faq-q-badge">Q</span>
+            <span class="faq-q-text">初めてでも相談できますか？</span>
+            <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4 6.5L9 11.5L14 6.5" stroke="#c9a87c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              もちろんです。初診カウンセリングは無料で承っております。「どんな施術が自分に向いているかわからない」という方も、まずはお気軽にご相談ください。無理な勧誘は一切行いません。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 予約CTA ===== -->
+  <section class="cta-section">
+    <div class="container">
+      <p class="section-label">RESERVATION</p>
+      <h2 class="section-title">ご予約・お問い合わせ</h2>
+      <p class="section-desc">初診カウンセリングは無料です。まずはお気軽にご連絡ください。</p>
+      <div class="cta-btns">
+        <a href="tel:03-1234-5678" class="btn btn--phone">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z" fill="currentColor"/></svg>
+          お電話でのご予約
+        </a>
+        <a href="#" class="btn btn--reserve">オンラインでご予約</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-main">NATURE Beauty Clinic</span>
+          <span class="logo-sub">美容皮膚科</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html">TOP</a>
+          <a href="index.html#menu">施術メニュー</a>
+          <a href="index.html#access">アクセス</a>
+        </nav>
+      </div>
+      <p class="footer-copy">&copy; 2026 ナチュレ美容皮膚科クリニック. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== ヘッダー：スクロール時クラス付与 ===== */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    /* ===== ハンバーガーメニュー ===== */
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('is-open');
+      nav.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    });
+    /* ナビリンククリックでメニューを閉じる */
+    nav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-open');
+        nav.classList.remove('is-open');
+      });
+    });
+
+    /* ===== スクロールアニメーション（Intersection Observer） ===== */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ===== FAQ アコーディオン ===== */
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+    });
+  </script>
+</body>
+</html>
