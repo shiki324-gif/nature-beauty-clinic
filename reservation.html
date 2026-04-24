@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ご予約 | ナチュレ美容皮膚科クリニック</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ===== 予約ページ固有スタイル ===== */
+
+    /* パンくず */
+    .breadcrumb {
+      background: var(--color-bg-alt);
+      padding: 0.75rem 0;
+      font-size: 0.75rem;
+      color: var(--color-text-lt);
+    }
+    .breadcrumb a { color: var(--color-accent); }
+    .breadcrumb span { margin: 0 0.5rem; }
+
+    /* ページヒーロー */
+    .page-hero {
+      background: var(--color-bg-warm);
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+    .page-hero .section-label { margin-bottom: 0.5rem; }
+    .page-hero .page-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+    .page-hero-desc {
+      font-size: 0.9rem;
+      color: var(--color-text-lt);
+      line-height: 1.9;
+    }
+
+    /* メインコンテンツ */
+    .reservation-section {
+      padding: 5rem 0 6rem;
+      background: var(--color-bg);
+    }
+
+    .reservation-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .reservation-inner {
+        grid-template-columns: 1fr 320px;
+        align-items: start;
+      }
+    }
+
+    /* フォーム */
+    .reservation-form-card {
+      background: var(--color-white);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .form-title {
+      font-family: var(--font-serif);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-required {
+      font-size: 0.65rem;
+      color: var(--color-white);
+      background: var(--color-accent);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    .form-optional {
+      font-size: 0.65rem;
+      color: var(--color-text-lt);
+      background: var(--color-bg-alt);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--color-border);
+      border-radius: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      appearance: none;
+    }
+    .form-control:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(201,168,124,0.15);
+      background: var(--color-white);
+    }
+    .form-control::placeholder {
+      color: #bbb;
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.7;
+    }
+
+    select.form-control {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a87c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 500px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--color-text-lt);
+      margin-top: 0.4rem;
+    }
+
+    /* 同意チェックボックス */
+    .form-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .form-check input[type="checkbox"] {
+      margin-top: 0.2rem;
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .form-check-label {
+      font-size: 0.8rem;
+      color: var(--color-text-lt);
+      line-height: 1.7;
+    }
+    .form-check-label a {
+      color: var(--color-accent);
+      text-decoration: underline;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* サイドバー */
+    .reservation-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .sidebar-card {
+      background: var(--color-white);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sidebar-card-title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sidebar-card-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 1rem;
+      background: var(--color-accent);
+      border-radius: 2px;
+    }
+
+    .sidebar-info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .sidebar-info-item {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+    .sidebar-info-label {
+      color: var(--color-accent);
+      font-weight: 500;
+      flex-shrink: 0;
+      min-width: 5rem;
+    }
+
+    .sidebar-tel {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-align: center;
+      margin: 0.75rem 0 0.4rem;
+      letter-spacing: 0.05em;
+    }
+    .sidebar-tel-note {
+      font-size: 0.75rem;
+      color: var(--color-text-lt);
+      text-align: center;
+    }
+
+    .sidebar-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .sidebar-step {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      font-size: 0.8rem;
+      color: var(--color-text);
+      line-height: 1.6;
+    }
+    .sidebar-step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    /* 送信完了モーダル */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.is-open {
+      display: flex;
+    }
+    .modal {
+      background: var(--color-white);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      animation: modalIn 0.3s ease;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--color-bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 0.75rem;
+    }
+    .modal-desc {
+      font-size: 0.875rem;
+      color: var(--color-text-lt);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== ヘッダー ===== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-main">NATURE Beauty Clinic</span>
+        <span class="logo-sub">美容皮膚科</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">TOP</a></li>
+          <li><a href="index.html#menu" class="nav-link">施術メニュー</a></li>
+          <li><a href="index.html#access" class="nav-link">アクセス</a></li>
+          <li><a href="reservation.html" class="nav-link nav-cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- パンくず -->
+  <nav class="breadcrumb" aria-label="パンくずリスト">
+    <div class="container">
+      <a href="index.html">TOP</a>
+      <span>›</span>
+      <span>ご予約</span>
+    </div>
+  </nav>
+
+  <!-- ページヒーロー -->
+  <div class="page-hero">
+    <div class="container">
+      <p class="section-label">RESERVATION</p>
+      <h1 class="page-hero-title">ご予約・お問い合わせ</h1>
+      <p class="page-hero-desc">
+        カウンセリングは無料です。まずはお気軽にご連絡ください。<br />
+        お電話でのご予約も承っております。
+      </p>
+    </div>
+  </div>
+
+  <!-- ===== 予約フォーム ===== -->
+  <section class="reservation-section">
+    <div class="container">
+      <div class="reservation-inner">
+
+        <!-- フォーム -->
+        <div class="reservation-form-card reveal">
+          <h2 class="form-title">予約フォーム</h2>
+          <form id="reservationForm" novalidate>
+
+            <!-- お名前 -->
+            <div class="form-group">
+              <label class="form-label" for="name">
+                お名前 <span class="form-required">必須</span>
+              </label>
+              <input type="text" id="name" name="name" class="form-control"
+                placeholder="山田 花子" required />
+            </div>
+
+            <!-- フリガナ -->
+            <div class="form-group">
+              <label class="form-label" for="kana">
+                フリガナ <span class="form-required">必須</span>
+              </label>
+              <input type="text" id="kana" name="kana" class="form-control"
+                placeholder="ヤマダ ハナコ" required />
+            </div>
+
+            <!-- 電話・メール -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="tel">
+                  電話番号 <span class="form-required">必須</span>
+                </label>
+                <input type="tel" id="tel" name="tel" class="form-control"
+                  placeholder="090-0000-0000" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">
+                  メールアドレス <span class="form-optional">任意</span>
+                </label>
+                <input type="email" id="email" name="email" class="form-control"
+                  placeholder="example@email.com" />
+              </div>
+            </div>
+
+            <!-- 希望施術 -->
+            <div class="form-group">
+              <label class="form-label" for="menu">
+                ご希望の施術 <span class="form-required">必須</span>
+              </label>
+              <select id="menu" name="menu" class="form-control" required>
+                <option value="" disabled selected>施術を選択してください</option>
+                <option value="consultation">無料カウンセリングのみ</option>
+                <option value="injection">ヒアルロン酸注射・ボトックス注射</option>
+                <option value="hair-removal">医療脱毛</option>
+                <option value="laser">レーザートーニング</option>
+                <option value="drip">高濃度ビタミンC・白玉点滴</option>
+                <option value="other">その他・複数メニュー</option>
+              </select>
+            </div>
+
+            <!-- 希望日時 -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="date1">
+                  第1希望日 <span class="form-required">必須</span>
+                </label>
+                <input type="date" id="date1" name="date1" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="date2">
+                  第2希望日 <span class="form-optional">任意</span>
+                </label>
+                <input type="date" id="date2" name="date2" class="form-control" />
+              </div>
+            </div>
+
+            <!-- 希望時間帯 -->
+            <div class="form-group">
+              <label class="form-label" for="time">
+                ご希望の時間帯 <span class="form-required">必須</span>
+              </label>
+              <select id="time" name="time" class="form-control" required>
+                <option value="" disabled selected>時間帯を選択してください</option>
+                <option value="morning">午前（11:00〜13:00）</option>
+                <option value="afternoon">午後（13:00〜17:00）</option>
+                <option value="evening">夕方（17:00〜20:00）</option>
+                <option value="any">指定なし</option>
+              </select>
+            </div>
+
+            <!-- ご質問・備考 -->
+            <div class="form-group">
+              <label class="form-label" for="message">
+                ご質問・備考 <span class="form-optional">任意</span>
+              </label>
+              <textarea id="message" name="message" class="form-control"
+                placeholder="施術についてのご質問や、アレルギー情報などがあればご記入ください。"></textarea>
+            </div>
+
+            <!-- 同意チェック -->
+            <div class="form-check">
+              <input type="checkbox" id="agree" name="agree" required />
+              <label class="form-check-label" for="agree">
+                <a href="#">プライバシーポリシー</a>に同意の上、送信します。
+                お送りいただいた個人情報は予約確認のみに使用いたします。
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn-submit">
+              予約を申し込む
+            </button>
+
+          </form>
+        </div>
+
+        <!-- サイドバー -->
+        <div class="reservation-sidebar reveal reveal--delay">
+
+          <!-- お電話でのご予約 -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-card-title">お電話でのご予約</h3>
+            <a href="tel:03-1234-5678" class="sidebar-tel">03-1234-5678</a>
+            <p class="sidebar-tel-note">
+              月・火・水・金 11:00〜20:00<br />
+              土・日 10:00〜18:00（木祝休診）
+            </p>
+            <div style="margin-top:1rem;">
+              <a href="tel:03-1234-5678" class="btn btn--primary" style="width:100%;text-align:center;display:block;">
+                電話をかける
+              </a>
+            </div>
+          </div>
+
+          <!-- 診療時間 -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-card-title">診療時間</h3>
+            <div class="sidebar-info-list">
+              <div class="sidebar-info-item">
+                <span class="sidebar-info-label">月・火・水・金</span>
+                <span>11:00 〜 20:00</span>
+              </div>
+              <div class="sidebar-info-item">
+                <span class="sidebar-info-label">土・日</span>
+                <span>10:00 〜 18:00</span>
+              </div>
+              <div class="sidebar-info-item">
+                <span class="sidebar-info-label" style="color:var(--color-text-lt);">休診日</span>
+                <span style="color:var(--color-text-lt);">木曜日・祝日</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ご予約の流れ -->
+          <div class="sidebar-card">
+            <h3 class="sidebar-card-title">ご予約の流れ</h3>
+            <div class="sidebar-steps">
+              <div class="sidebar-step">
+                <span class="sidebar-step-num">1</span>
+                <span>フォームまたはお電話でご予約</span>
+              </div>
+              <div class="sidebar-step">
+                <span class="sidebar-step-num">2</span>
+                <span>スタッフよりご連絡（1営業日以内）</span>
+              </div>
+              <div class="sidebar-step">
+                <span class="sidebar-step-num">3</span>
+                <span>来院・無料カウンセリング</span>
+              </div>
+              <div class="sidebar-step">
+                <span class="sidebar-step-num">4</span>
+                <span>施術開始</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 送信完了モーダル ===== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#c9a87c" opacity="0.2"/>
+          <path d="M9 16.5l5 5 9-9" stroke="#c9a87c" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="modal-title">ご予約を受け付けました</h2>
+      <p class="modal-desc">
+        お申し込みありがとうございます。<br />
+        1営業日以内に担当スタッフより<br />
+        ご連絡差し上げます。<br /><br />
+        ご不明な点はお電話にてお気軽にご相談ください。
+      </p>
+      <a href="index.html" class="btn btn--primary" style="min-width:180px;">
+        トップページへ戻る
+      </a>
+    </div>
+  </div>
+
+  <!-- ===== フッター ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span class="logo-main">NATURE Beauty Clinic</span>
+          <span class="logo-sub">美容皮膚科</span>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html">TOP</a>
+          <a href="index.html#menu">施術メニュー</a>
+          <a href="index.html#access">アクセス</a>
+          <a href="reservation.html">ご予約</a>
+        </nav>
+      </div>
+      <p class="footer-copy">&copy; 2026 ナチュレ美容皮膚科クリニック. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ===== ハンバーガーメニュー ===== */
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('is-open');
+      nav.classList.toggle('is-open');
+    });
+
+    /* ===== スクロールアニメーション ===== */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ===== フォーム送信 ===== */
+    const form = document.getElementById('reservationForm');
+    const modalOverlay = document.getElementById('modalOverlay');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      /* バリデーション */
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(el => {
+        el.style.borderColor = '';
+        if (!el.value || (el.type === 'checkbox' && !el.checked)) {
+          el.style.borderColor = '#e07070';
+          valid = false;
+        }
+      });
+
+      if (!valid) {
+        const firstError = form.querySelector('[style*="e07070"]');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      /* 送信完了モーダル表示 */
+      modalOverlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    /* モーダルを背景クリックで閉じる */
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
