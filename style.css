@@ -118,6 +118,18 @@ ul  { list-style: none; }
   transform: translateY(-2px);
 }
 
+/* ヒーロー内のアウトラインボタン（白色） */
+.btn--outline-white {
+  background: transparent;
+  color: var(--color-white);
+  border-color: rgba(255,255,255,0.8);
+}
+.btn--outline-white:hover {
+  background: rgba(255,255,255,0.15);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
 /* =============================================
    共通セクションラベル・タイトル
    ============================================= */
@@ -761,6 +773,102 @@ ul  { list-style: none; }
   font-size: 0.75rem;
   color: var(--color-text-lt);
   margin-top: 0.25rem;
+}
+
+/* =============================================
+   ヒーロー：ボタン横並び
+   ============================================= */
+.hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* =============================================
+   メニューカード：料金表示
+   ============================================= */
+.menu-card-price {
+  font-size: 0.8rem;
+  color: var(--color-text-lt);
+  margin-top: -0.4rem;
+}
+.menu-card-price span {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* =============================================
+   お客様の声
+   ============================================= */
+.voice {
+  padding: var(--sp-xl) 0;
+  background: var(--color-bg-alt);
+}
+
+.voice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .voice-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.voice-card {
+  background: var(--color-white);
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.voice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.voice-stars {
+  color: #e8b84b;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.voice-text {
+  font-size: 0.875rem;
+  color: var(--color-text);
+  line-height: 1.9;
+  flex: 1;
+}
+
+.voice-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.voice-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.voice-menu {
+  font-size: 0.7rem;
+  color: var(--color-accent);
+  background: var(--color-bg-warm);
+  padding: 0.15rem 0.6rem;
+  border-radius: 50px;
 }
 
 /* =============================================

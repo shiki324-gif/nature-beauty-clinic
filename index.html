@@ -71,7 +71,10 @@
         一人ひとりの肌と丁寧に向き合い、<br />
         自信を持てる素肌へ導きます。
       </p>
-      <a href="#menu" class="btn btn--primary fade-in fade-in--delay3">施術メニューを見る</a>
+      <div class="hero-btns fade-in fade-in--delay3">
+        <a href="#menu" class="btn btn--primary">施術メニューを見る</a>
+        <a href="#access" class="btn btn--outline-white">ご予約はこちら</a>
+      </div>
     </div>
 
     <!-- スクロールインジケーター -->
@@ -141,6 +144,7 @@
               </svg>
             </div>
             <h3 class="menu-card-title">ヒアルロン酸注射・ボトックス注射</h3>
+            <p class="menu-card-price">ヒアルロン酸 <span>¥33,000〜</span> / ボトックス <span>¥22,000〜</span></p>
             <p class="menu-card-desc">
               ヒアルロン酸でほうれい線・涙袋にボリュームをプラス。ボトックスで額・眉間・目尻のシワや小顔・エラ張りを改善。どちらもダウンタイムが少なく自然な仕上がりです。
             </p>
@@ -173,6 +177,7 @@
               </svg>
             </div>
             <h3 class="menu-card-title">医療脱毛</h3>
+            <p class="menu-card-price">全身（VIO込み） <span>¥98,000〜</span> / 部位別 <span>¥8,800〜</span></p>
             <p class="menu-card-desc">
               医療用レーザーで毛根にダイレクトにアプローチ。持続的な脱毛効果が高く、全身・顔・VIOなど幅広い部位に対応しています。
             </p>
@@ -204,6 +209,7 @@
               </svg>
             </div>
             <h3 class="menu-card-title">レーザートーニング</h3>
+            <p class="menu-card-price">1回 <span>¥16,500〜</span> / 5回コース <span>¥71,500〜</span></p>
             <p class="menu-card-desc">
               シミ・そばかす・肝斑などの色素沈着を改善します。肌のトーンを均一に整え、透明感のあるお肌へ導きます。
             </p>
@@ -236,6 +242,7 @@
               </svg>
             </div>
             <h3 class="menu-card-title">高濃度ビタミンC・白玉点滴</h3>
+            <p class="menu-card-price">高濃度ビタミンC <span>¥11,000〜</span> / 白玉点滴 <span>¥16,500〜</span></p>
             <p class="menu-card-desc">
               高濃度ビタミンC点滴でシミ・くすみを予防し、強力な抗酸化作用で美肌・免疫力向上をサポート。白玉点滴（グルタチオン）は透明感・美白効果に優れ、内側からトーンアップを叶えます。
             </p>
@@ -252,6 +259,47 @@
     </div>
   </section>
 
+  <!-- ===== お客様の声 ===== -->
+  <section class="voice" id="voice">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">VOICE</p>
+        <h2 class="section-title">お客様の声</h2>
+        <p class="section-desc">実際にご来院いただいた患者様からのご感想です。</p>
+      </div>
+      <div class="voice-grid">
+
+        <div class="voice-card reveal">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">「ヒアルロン酸注射で気になっていたほうれい線がふっくらして、自然な仕上がりに大満足です。先生の説明がとても丁寧で、初めてでも安心して受けられました。」</p>
+          <div class="voice-author">
+            <span class="voice-name">30代 女性</span>
+            <span class="voice-menu">ヒアルロン酸注射</span>
+          </div>
+        </div>
+
+        <div class="voice-card reveal reveal--delay">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">「医療脱毛を全身コースでお願いしました。痛みも少なく、スタッフの方がずっと気にかけてくださったので、リラックスして施術を受けられました。効果も早くて驚いています！」</p>
+          <div class="voice-author">
+            <span class="voice-name">20代 女性</span>
+            <span class="voice-menu">医療脱毛（全身）</span>
+          </div>
+        </div>
+
+        <div class="voice-card reveal reveal--delay2">
+          <div class="voice-stars">★★★★★</div>
+          <p class="voice-text">「長年悩んでいた肝斑がレーザートーニングで目立たなくなってきました。コース終了後も肌のトーンが上がった気がして、毎朝のメイクが楽しくなりました。」</p>
+          <div class="voice-author">
+            <span class="voice-name">40代 女性</span>
+            <span class="voice-menu">レーザートーニング</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ===== アクセス ===== -->
   <section class="access" id="access">
     <div class="container">
@@ -260,17 +308,18 @@
         <h2 class="section-title">アクセス</h2>
       </div>
       <div class="access-inner">
-        <!-- 地図プレースホルダー -->
+        <!-- Google Maps -->
         <div class="access-map reveal">
-          <div class="map-placeholder">
-            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="40" cy="35" r="15" fill="#c9a87c" opacity="0.25"/>
-              <circle cx="40" cy="35" r="7" fill="#c9a87c" opacity="0.55"/>
-              <path d="M40 42 L40 60" stroke="#c9a87c" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
-            </svg>
-            <p>地図はこちらに表示されます</p>
-            <span>（Google Maps を埋め込み予定）</span>
-          </div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.395!2d139.7099!3d35.6677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188ca218f91547%3A0xd11a5ed47b5f3d89!2z6KW_5Y6f6b6N6aeF!5e0!3m2!1sja!2sjp!4v1713200000000!5m2!1sja!2sjp"
+            width="100%"
+            height="100%"
+            style="border:0; border-radius:16px;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="ナチュレ美容皮膚科クリニック アクセスマップ"
+          ></iframe>
         </div>
         <!-- アクセス情報 -->
         <div class="access-info reveal reveal--delay">
