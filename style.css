@@ -795,6 +795,66 @@ ul  { list-style: none; }
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
+  align-items: center;
+}
+
+/* ご予約ボタン：大きめ・目立つ */
+.btn--hero-main {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  box-shadow: var(--shadow-md);
+}
+
+/* 施術メニューボタン：補助的・小さめ */
+.btn--hero-sub {
+  padding: 0.65rem 1.5rem;
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+.btn--hero-sub:hover { opacity: 1; }
+
+/* =============================================
+   アクセス：マップ経路ボタン
+   ============================================= */
+.access-map-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.access-map-wrap .access-map {
+  flex: 1;
+  min-height: 400px;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.access-map-wrap .access-map iframe {
+  border-radius: 16px 16px 0 0 !important;
+}
+
+.access-map-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1rem;
+  background: var(--color-accent);
+  color: var(--color-white);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: background var(--transition);
+  border-radius: 0 0 16px 16px;
+}
+.access-map-btn:hover {
+  background: var(--color-accent-dk);
+  color: var(--color-white);
 }
 
 /* =============================================
